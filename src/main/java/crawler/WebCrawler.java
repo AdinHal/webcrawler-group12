@@ -1,4 +1,4 @@
-package main;
+package main.java.crawler;
 
 public class WebCrawler {
 }

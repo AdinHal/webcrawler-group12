@@ -1,4 +1,4 @@
-package main;
+package main.java.crawler;
 
 import java.util.Arrays;
 import java.util.List;
