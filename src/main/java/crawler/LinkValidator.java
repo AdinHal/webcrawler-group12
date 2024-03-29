@@ -1,4 +1,4 @@
 package main.java.crawler;
 
-public class WebCrawler {
+public class LinkValidator {
 }
