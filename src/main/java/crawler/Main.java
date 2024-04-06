@@ -24,6 +24,7 @@ public class Main {
 
         scanner.close();
 
+        // Create Config and pass it to the service
 
     }
 }
