@@ -1,4 +1,4 @@
-package main.java.crawler;
+package crawler;
 
 public class PageParser {
 }

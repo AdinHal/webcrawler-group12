@@ -1,4 +1,4 @@
-package main.java.crawler;
+package crawler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,5 +28,6 @@ public class Main {
         Config config = new Config(crawl_url,crawl_depth,crawlDomainsList,crawl_lang);
 
         CrawlerService crawlerService = new CrawlerService(config);
+        crawlerService.getPageLinks(config.getCrawlUrl(), config.getCrawlDepth());
     }
 }

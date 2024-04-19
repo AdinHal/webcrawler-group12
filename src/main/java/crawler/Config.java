@@ -1,4 +1,4 @@
-package main.java.crawler;
+package crawler;
 
 import java.util.List;
 
