@@ -1,4 +1,4 @@
-package main.java.crawler;
+package crawler;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ public class Config {
     private int crawlDepth;
     private List<String> crawlDomains;
     private String crawlLang;
+
 
     public Config(String crawlUrl, int crawlDepth, List<String> crawlDomains, String crawlLang){
         this.crawlUrl = crawlUrl;
