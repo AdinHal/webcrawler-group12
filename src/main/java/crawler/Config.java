@@ -9,6 +9,7 @@ public class Config {
     private List<String> crawlDomains;
     private String crawlLang;
 
+
     public Config(String crawlUrl, int crawlDepth, List<String> crawlDomains, String crawlLang){
         this.crawlUrl = crawlUrl;
         this.crawlDepth = crawlDepth;
