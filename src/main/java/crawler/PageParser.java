@@ -9,52 +9,33 @@ import java.io.IOException;
 import java.util.HashSet;
 
 public class PageParser {
-    private Config config;
-    private HashSet<String> h1headers;
+    private final HashSet<String> headerlist;
 
-    public PageParser(Config config) {
-        this.config = config;
-        this.h1headers = new HashSet<String>();
+    public PageParser() {
+        this.headerlist = new HashSet<>();
     }
 
-    public void getH1Headers(String URL, String lang) {
+    public void getHeaders(String URL, String lang, int depth, boolean isSummary) {
         try {
             Document document = Jsoup.connect(URL).get();
 
-            Elements headers = document.select("h1");
+            Elements headers = document.select("h1, h2, h3");
 
             for (Element header : headers){
                 String text = header.text();
 
-                if(!h1headers.contains(text)){
-                    System.out.println("# --> " + text);
-                    h1headers.add(text);
+                if(!headerlist.contains(text) && isSummary){
+                    routePrinter(URL);
+                    System.out.print(text);
+                    headerlist.add(text);
                 }
-
-                /*if(lang != null){
-                    System.out.println(TranslatorService.Translate(header.text(), lang));
-                }
-                else{
-                    System.out.println(header.text());
-                }*/
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void getH2Headers(String URL, String lang) {
-        try {
-            Document document = Jsoup.connect(URL).get();
-
-            Elements headers = document.select("h2");
-
-            for (Element header : headers){
-                String text = header.text();
-
-                if(!h1headers.contains(text)){
-                    System.out.println("## --> " + text);
-                    h1headers.add(text);
+                else if(!headerlist.contains(text) && !isSummary){
+                    routePrinter(URL);
+                    for (int i = 0; i < depth; i++) {
+                        System.out.print("-");
+                    }
+                    System.out.println("> " + text);
+                    headerlist.add(text);
                 }
 
                 /*if(lang != null){
@@ -72,9 +53,22 @@ public class PageParser {
     public void printSummary(String URL, String lang){
         System.out.println("Summary:\n");
 
-        getH1Headers(URL, lang);
-        /* Unneeded until I figure out how to sort subheaders below headers
-        getH2Headers(URL, lang);*/
+        getHeaders(URL, lang, 0, true);
     }
 
+    public void routePrinter(String URL){
+        //Temp code, finishing this tomorrow because I don't feel like doing stuff anymore for 2day LOL
+        System.out.print("#");
+
+        /*Document document;
+
+        try {
+            document = Jsoup.connect(URL).get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Elements headers = document.select("h1, h2, h3");
+        */
+    }
 }

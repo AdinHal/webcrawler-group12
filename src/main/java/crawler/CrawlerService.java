@@ -9,21 +9,20 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashSet;
 
 public class CrawlerService {
 
-    private Config config;
-    private PageParser pageParser;
-    private HashSet<String> links;
-    private final int maxdepth = 3;
+    private final Config config;
+    private final LinkValidator validator;
+    private final PageParser pageParser;
+    private final HashSet<String> links;
 
-    public CrawlerService(Config config, PageParser pageParser){
+    public CrawlerService(Config config, PageParser pageParser, LinkValidator validator){
         this.config = config;
+        this.validator = validator;
         this.pageParser = pageParser;
         this.links = new HashSet<String>();
     }
@@ -45,14 +44,14 @@ public class CrawlerService {
     }
 
     public void getPageLinks(String URL, int depth) {
-
+        int maxdepth = config.getCrawlDepth();
         if (depth > maxdepth || links.contains(URL)) {
             return;
         }
 
         String userDomain = config.getCrawlDomains().get(0);
 
-        System.out.println("Depth: " + depth + " - " + URL);
+        System.out.println("Fetching from: " + URL);
         try {
             links.add(URL);
 
@@ -67,8 +66,8 @@ public class CrawlerService {
                     String domain = uri.getHost();
 
                     if(domain != null && domain.equals(userDomain)){
-                        if (isLinkReachable(absUrl)) {
-                            pageParser.getH1Headers(URL, config.getCrawlLang());
+                        if (validator.isLinkReachable(absUrl)) {
+                            pageParser.getHeaders(URL, config.getCrawlLang(), depth, false);
                             getPageLinks(absUrl, depth+ 1);
                         }
                         else{
@@ -80,21 +79,9 @@ public class CrawlerService {
                     URI.printStackTrace();
                 }
             }
-            pageParser.getH1Headers(URL, config.getCrawlLang());
+            pageParser.getHeaders(URL, config.getCrawlLang(), depth, false);
         } catch (IOException e) {
             System.err.println("For '" + URL + "': " + e.getMessage());
-        }
-    }
-
-    boolean isLinkReachable(String link) {
-        try {
-            URL url = new URL(link);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("HEAD");
-            int responseCode = connection.getResponseCode();
-            return (responseCode == HttpURLConnection.HTTP_OK);
-        } catch (IOException e) {
-            return false;
         }
     }
 }

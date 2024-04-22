@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Config {
 
-    private String crawlUrl;
-    private int crawlDepth;
-    private List<String> crawlDomains;
-    private String crawlLang;
+    private final String crawlUrl;
+    private final int crawlDepth;
+    private final List<String> crawlDomains;
+    private final String crawlLang;
 
 
     public Config(String crawlUrl, int crawlDepth, List<String> crawlDomains, String crawlLang){

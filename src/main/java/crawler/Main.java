@@ -25,14 +25,18 @@ public class Main {
         scanner.close();
 
         // Create Config and pass it to the service
-        Config config = new Config(crawl_url,crawl_depth,crawlDomainsList,crawl_lang);
-        PageParser pageParser = new PageParser(config);
-        CrawlerService crawlerService = new CrawlerService(config, pageParser);
 
-        pageParser.printSummary(config.getCrawlUrl(), config.getCrawlLang());
+        Config config = new Config(crawl_url, crawl_depth, crawlDomainsList, crawl_lang);
+        PageParser pageParser = new PageParser();
+        LinkValidator validator = new LinkValidator();
+        CrawlerService crawlerService = new CrawlerService(config, pageParser, validator);
 
-        System.out.println("\nTraversing site...\n");
-
-        crawlerService.getPageLinks(config.getCrawlUrl(), config.getCrawlDepth());
+        try {
+            pageParser.printSummary(config.getCrawlUrl(), config.getCrawlLang());
+            System.out.println("\nTraversing site...\n");
+            crawlerService.getPageLinks(config.getCrawlUrl(), 0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught!");
+        }
     }
 }
