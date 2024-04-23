@@ -45,11 +45,11 @@ public class CrawlerService {
     }
 
     public void getPageLinks(String URL, int depth) {
-        int startdepth = 0;
 
         if (depth > maxdepth || links.contains(URL)) {
             return;
         }
+
         String userDomain = config.getCrawlDomains().get(0);
 
         System.out.println("Depth: " + depth + " - " + URL);
@@ -67,17 +67,14 @@ public class CrawlerService {
                     String domain = uri.getHost();
 
                     if(domain != null && domain.equals(userDomain)){
-                        if (isLinkReachable(absUrl) && startdepth <= depth) {
+                        if (isLinkReachable(absUrl)) {
                             pageParser.getH1Headers(URL, config.getCrawlLang());
-                            getPageLinks(page.attr("abs:href"), startdepth + 1);
+                            getPageLinks(absUrl, depth+ 1);
                         }
-                        else if ( startdepth > depth) {
-                            startdepth = 0;
-                            getPageLinks(page.attr("abs:href"), startdepth);
-                        }
-                        else {
+                        else{
                             System.out.println("Broken link: " + absUrl);
                         }
+
                     }
                 } catch (URISyntaxException URI) {
                     URI.printStackTrace();
