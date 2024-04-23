@@ -1,13 +1,27 @@
 #  WebCrawler - Group 12
 
-## About
+## About / Usage
 
 - This Java application serves as a robust web crawler, designed to traverse websites starting from a user-provided URL and explore them up to a specified crawl depth.
-- Arguments:
-  - URL (args[0]): The first argument, if present, is used as the URL.
-  - Crawl Depth (args[1]): The second argument, represents the crawl depth.
-  - Domains (args[2]): The third argument, a comma-separated string, is split into a list of domains.
-  - Language (args[3]): The fourth argument, optional, specifies the translation language.
+
+- This application accepts several command-line arguments to control its web crawling and processing behavior:
+
+  - URL:
+      - Description: The starting URL from which the crawler will begin its operation.
+      - Command: Enter the URL when prompted: Please enter the URL:
+      - Example: https://example.com
+  - Crawl Depth:
+      - Description: The maximum depth the crawler will traverse from the starting URL.
+      - Command: Specify the depth when prompted: Please enter the Crawl depth
+      - Example: 3 (This would mean the crawler goes three levels deep from the starting page.)
+  - Domains to be Crawled:
+      - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
+      - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
+      - Example: example.com,sub.example.com
+  - Translation Language (Optional):
+      - Description: If specified, the text found during crawling will be translated into the chosen language.
+      - Command: Enter the language code when prompted, or press 'Enter' to skip: Please enter the language the text should be translated to (Optional* -> Press 'Enter' if You want to skip):
+      - Example: fr (French), Leave blank to skip translation.
 
 ## Run / Setup
 
@@ -63,56 +77,14 @@ java -cp src/main/java crawler.Main arg1 arg2 arg3
 
 Read more : [StackOverflow Answer](https://stackoverflow.com/a/2361108/13667327)
 
-## Usage
-
-This application accepts several command-line arguments to control its web crawling and processing behavior. Here’s a breakdown of each argument and how to use it:
-
-- URL:
-  - Description: The starting URL from which the crawler will begin its operation.
-  - Command: Enter the URL when prompted: Please enter the URL:
-  - Example: http://example.com
-- Crawl Depth:
-  - Description: The maximum depth the crawler will traverse from the starting URL.
-  - Command: Specify the depth when prompted: Please enter the Crawl depth
-  - Example: 3 (This would mean the crawler goes three levels deep from the starting page.)
-- Domains to be Crawled:
-  - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
-  - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
-  - Example: example.com,sub.example.com
-- Translation Language (Optional):
-  - Description: If specified, the text found during crawling will be translated into the chosen language.
-  - Command: Enter the language code when prompted, or press 'Enter' to skip: Please enter the language the text should be translated to (Optional* -> Press 'Enter' if You want to skip):
-  - Example: fr (French), Leave blank to skip translation.
-
 ## Features
 
--Apple AR
-
-Apple AR is a platform that allows developers to create augmented reality experiences for iOS, macOS, and tvOS devices. AR is a technology that overlays digital information onto the real world, allowing users to see and interact with virtual objects in their environment.
-
-Apple AR is powered by ARKit, a framework that provides developers with the tools they need to create AR apps. ARKit uses the device's camera and sensors to track the user's position and orientation in the real world. This information is then used to place and render virtual objects in the scene.
-
--RealityKit
-
-RealityKit is a high-performance 3D simulation and rendering framework for AR and VR. It is built on top of ARKit and provides developers with a number of features that make it easier to create realistic and immersive AR experiences.
-
-RealityKit includes features such as:
-
-Physically based materials
-Environment reflections
-Grounding shadows
-Camera noise
-Motion blur
-Custom rendering
-Custom systems
-
--Apple AR and RealityKit in Use
-
-Apple AR and RealityKit are being used to create a wide variety of AR experiences, including:
-
-Games
-Educational apps
-Shopping apps
-Navigation apps
-Product design apps
-Medical apps
+The crawler implements  the following features:
+- input the URL, the depth of websites to crawl, and the domain(s) of websites to be crawled
+- create a compact overview of the crawled websites
+- record only the headings
+- represent the depth of the crawled websites with proper indentation (see example)
+- record the URLs of the crawled sites
+- highlight broken links
+- find the links to other websites and recursively do the analysis for those websites (it is enough if you analyze the pages at a depth of 2 without visiting further links, you might also allow the user to configure this depth via the command line)
+- store the results in a single markdown file (.md extension)
