@@ -3,7 +3,11 @@
 ## About
 
 - This Java application serves as a robust web crawler, designed to traverse websites starting from a user-provided URL and explore them up to a specified crawl depth.
-
+- Arguments:
+  - URL (args[0]): The first argument, if present, is used as the URL.
+  - Crawl Depth (args[1]): The second argument, represents the crawl depth.
+  - Domains (args[2]): The third argument, a comma-separated string, is split into a list of domains.
+  - Language (args[3]): The fourth argument, optional, specifies the translation language.
 
 ## Run / Setup
 
@@ -58,6 +62,27 @@ java -cp src/main/java crawler.Main arg1 arg2 arg3
 ```
 
 Read more : [StackOverflow Answer](https://stackoverflow.com/a/2361108/13667327)
+
+## Usage
+
+This application accepts several command-line arguments to control its web crawling and processing behavior. Here’s a breakdown of each argument and how to use it:
+
+- URL:
+  - Description: The starting URL from which the crawler will begin its operation.
+  - Command: Enter the URL when prompted: Please enter the URL:
+  - Example: http://example.com
+- Crawl Depth:
+  - Description: The maximum depth the crawler will traverse from the starting URL.
+  - Command: Specify the depth when prompted: Please enter the Crawl depth
+  - Example: 3 (This would mean the crawler goes three levels deep from the starting page.)
+- Domains to be Crawled:
+  - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
+  - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
+  - Example: example.com,sub.example.com
+- Translation Language (Optional):
+  - Description: If specified, the text found during crawling will be translated into the chosen language.
+  - Command: Enter the language code when prompted, or press 'Enter' to skip: Please enter the language the text should be translated to (Optional* -> Press 'Enter' if You want to skip):
+  - Example: fr (French), Leave blank to skip translation.
 
 ## Features
 
