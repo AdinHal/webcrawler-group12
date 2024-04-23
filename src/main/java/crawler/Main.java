@@ -24,7 +24,6 @@ public class Main {
 
         scanner.close();
 
-        // Create Config and pass it to the service
         Config config = new Config(crawl_url,crawl_depth,crawlDomainsList,crawl_lang);
         PageParser pageParser = new PageParser(config);
         CrawlerService crawlerService = new CrawlerService(config, pageParser);
