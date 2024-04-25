@@ -20,13 +20,12 @@ public class CrawlerService {
     private final PageParser pageParser;
     private final HashSet<String> links;
 
-    public CrawlerService(Config config, PageParser pageParser, LinkValidator validator){
+    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser){
         this.config = config;
         this.validator = validator;
         this.pageParser = pageParser;
         this.links = new HashSet<String>();
     }
-
 
     private void saveUrl(String url) throws IOException {
         // the assignment specification does not say if we have to write it inside the .md file or in a separate text file - path can be changed
@@ -43,7 +42,9 @@ public class CrawlerService {
 
     }
 
-    public void getPageLinks(String URL, int depth) {
+    public void getPageLinks(String URL) {
+        int depth = 0;
+
         int maxdepth = config.getCrawlDepth();
         if (depth > maxdepth || links.contains(URL)) {
             return;
@@ -67,8 +68,8 @@ public class CrawlerService {
 
                     if(domain != null && domain.equals(userDomain)){
                         if (validator.isLinkReachable(absUrl)) {
-                            pageParser.getHeaders(URL, config.getCrawlLang(), depth, false);
-                            getPageLinks(absUrl, depth+ 1);
+                            pageParser.getHeaders(URL, maxdepth, false);
+                            getPageLinks(absUrl);
                         }
                         else{
                             System.out.println("Broken link: " + absUrl);
@@ -79,7 +80,7 @@ public class CrawlerService {
                     URI.printStackTrace();
                 }
             }
-            pageParser.getHeaders(URL, config.getCrawlLang(), depth, false);
+            pageParser.getHeaders(URL, depth, false);
         } catch (IOException e) {
             System.err.println("For '" + URL + "': " + e.getMessage());
         }

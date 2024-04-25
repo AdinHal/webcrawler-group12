@@ -15,52 +15,48 @@ public class PageParser {
         this.headerlist = new HashSet<>();
     }
 
-    public void getHeaders(String URL, String lang, int depth, boolean isSummary) {
+    public void getHeaders(String URL, int depth, boolean isSummary) {
         try {
             Document document = Jsoup.connect(URL).get();
 
             Elements headers = document.select("h1, h2, h3");
 
+            int index = 0;
+
             for (Element header : headers){
                 String text = header.text();
 
                 if(!headerlist.contains(text) && isSummary){
-                    routePrinter(URL);
+                    routePrinter(URL, index);
                     System.out.print(text);
+                    System.out.print("\n");
                     headerlist.add(text);
+                    index++;
                 }
                 else if(!headerlist.contains(text) && !isSummary){
-                    routePrinter(URL);
-                    for (int i = 0; i < depth; i++) {
+                    routePrinter(URL, index);
+                    for (int i = 0; i <= depth; i++) {
                         System.out.print("-");
                     }
                     System.out.println("> " + text);
                     headerlist.add(text);
+                    index++;
                 }
-
-                /*if(lang != null){
-                    System.out.println(TranslatorService.Translate(header.text(), lang));
-                }
-                else{
-                    System.out.println(header.text());
-                }*/
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void printSummary(String URL, String lang){
+    public void printSummary(String URL){
         System.out.println("Summary:\n");
 
-        getHeaders(URL, lang, 0, true);
+        getHeaders(URL, 0, true);
+        System.out.print("\n");
     }
 
-    public void routePrinter(String URL){
-        //Temp code, finishing this tomorrow because I don't feel like doing stuff anymore for 2day LOL
-        System.out.print("#");
-
-        /*Document document;
+    public void routePrinter(String URL, int index){
+        Document document;
 
         try {
             document = Jsoup.connect(URL).get();
@@ -69,6 +65,19 @@ public class PageParser {
         }
 
         Elements headers = document.select("h1, h2, h3");
-        */
+        Element header = headers.get(index);
+
+        if(header.is("h3")){
+            System.out.print("### ");
+        }
+        else if(header.is("h2")){
+            System.out.print("## ");
+        }
+        else if(header.is("h1")){
+            System.out.print("# ");
+        }
+        else{
+            System.out.print("X ");
+        }
     }
 }
