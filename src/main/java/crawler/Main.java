@@ -10,18 +10,18 @@ public class Main {
         String crawl_url = getInput(args, 0, scanner, "Please enter the URL:");
         int crawl_depth = Integer.parseInt(getInput(args, 1, scanner, "Please enter the Crawl depth"));
         String crawl_domains = getInput(args, 2, scanner, "Please enter the domains to be crawled (comma-separated, no spaces):");
-        String crawl_lang = getInput(args, 3, scanner, "Please enter the language the text should be translated to (Optional* -> Press 'Enter' if You want to skip):", true);
 
         scanner.close();
 
         List<String> crawlDomainsList = Arrays.asList(crawl_domains.split(","));
-        Config config = new Config(crawl_url, crawl_depth, crawlDomainsList, crawl_lang);
-        PageParser pageParser = new PageParser(config);
-        CrawlerService crawlerService = new CrawlerService(config, pageParser);
+        Config config = new Config(crawl_url, crawl_depth, crawlDomainsList);
+        PageParser pageParser = new PageParser();
+        LinkValidator validator = new LinkValidator();
+        CrawlerService crawlerService = new CrawlerService(config, validator, pageParser);
 
-        pageParser.printSummary(config.getCrawlUrl(), config.getCrawlLang());
+        pageParser.printSummary(config.getCrawlUrl());
         System.out.println("\nTraversing site...\n");
-        crawlerService.getPageLinks(config.getCrawlUrl(), config.getCrawlDepth());
+        crawlerService.getPageLinks(config.getCrawlUrl());
     }
 
     private static String getInput(String[] args, int index, Scanner scanner, String message) {

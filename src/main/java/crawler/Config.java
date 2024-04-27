@@ -4,17 +4,15 @@ import java.util.List;
 
 public class Config {
 
-    private String crawlUrl;
-    private int crawlDepth;
-    private List<String> crawlDomains;
-    private String crawlLang;
+    private final String crawlUrl;
+    private final int crawlDepth;
+    private final List<String> crawlDomains;
 
 
-    public Config(String crawlUrl, int crawlDepth, List<String> crawlDomains, String crawlLang){
+    public Config(String crawlUrl, int crawlDepth, List<String> crawlDomains){
         this.crawlUrl = crawlUrl;
         this.crawlDepth = crawlDepth;
         this.crawlDomains = crawlDomains;
-        this.crawlLang = crawlLang;
     }
 
     public String getCrawlUrl() {
@@ -27,9 +25,5 @@ public class Config {
 
     public List<String> getCrawlDomains() {
         return crawlDomains;
-    }
-
-    public String getCrawlLang() {
-        return crawlLang;
     }
 }
