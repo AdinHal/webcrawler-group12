@@ -20,15 +20,7 @@ public class Main {
         Config config = new Config(crawl_url, crawl_depth, crawlDomainsList);
         PageParser pageParser = new PageParser();
         LinkValidator validator = new LinkValidator();
-        CrawlerService crawlerService = new CrawlerService(config, validator, pageParser);
-        crawlerService.setFilePath(crawledURLs_Path);
-
-        try {
-            crawlerService.initFilePath();
-        } catch (IOException e) {
-            System.err.println("Error initializing file path: " + e.getMessage());
-            return;
-        }
+        CrawlerService crawlerService = new CrawlerService(config, validator, pageParser, crawledURLs_Path);
 
         pageParser.printSummary(config.getCrawlUrl());
         System.out.println("\nTraversing site...\n");
