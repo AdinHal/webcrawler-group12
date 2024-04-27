@@ -5,12 +5,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 
 public class CrawlerService {
@@ -19,18 +18,33 @@ public class CrawlerService {
     private final LinkValidator validator;
     private final PageParser pageParser;
     private final HashSet<String> links;
+    private String filePath;
 
     public CrawlerService(Config config, LinkValidator validator, PageParser pageParser){
         this.config = config;
         this.validator = validator;
         this.pageParser = pageParser;
         this.links = new HashSet<String>();
+        this.filePath = "";
+    }
+
+    public void initFilePath() throws IOException{
+        if(filePath.trim().isEmpty() || filePath == null){
+            System.out.println("No path provided by user. Creating temp directory.");
+            Path folderPath = Files.createTempDirectory("tempFolder");
+            File tempFilePath = new File(folderPath.toFile(),"urls.md");
+            filePath = tempFilePath.getAbsolutePath();
+            System.out.println("File path: "+filePath);
+        }else{
+            File file = new File(filePath);
+            if(!file.exists()){
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            }
+        }
     }
 
     private void saveUrl(String url) throws IOException {
-        // the assignment specification does not say if we have to write it inside the .md file or in a separate text file - path can be changed
-        String filePath = "crawledURLs.txt";
-
         try(FileWriter fileWriter = new FileWriter(filePath,true)){
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(bufferedWriter);
@@ -84,5 +98,9 @@ public class CrawlerService {
         } catch (IOException e) {
             System.err.println("For '" + URL + "': " + e.getMessage());
         }
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

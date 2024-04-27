@@ -1,5 +1,6 @@
 package crawler;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -7,9 +8,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         String crawl_url = getInput(args, 0, scanner, "Please enter the URL:");
         int crawl_depth = Integer.parseInt(getInput(args, 1, scanner, "Please enter the Crawl depth"));
         String crawl_domains = getInput(args, 2, scanner, "Please enter the domains to be crawled (comma-separated, no spaces):");
+        String crawledURLs_Path = getInput(args,3,scanner,"Please enter the Path where the .md File should be stored. Will be stored under temp as per default",true);
 
         scanner.close();
 
@@ -18,6 +21,14 @@ public class Main {
         PageParser pageParser = new PageParser();
         LinkValidator validator = new LinkValidator();
         CrawlerService crawlerService = new CrawlerService(config, validator, pageParser);
+        crawlerService.setFilePath(crawledURLs_Path);
+
+        try {
+            crawlerService.initFilePath();
+        } catch (IOException e) {
+            System.err.println("Error initializing file path: " + e.getMessage());
+            return;
+        }
 
         pageParser.printSummary(config.getCrawlUrl());
         System.out.println("\nTraversing site...\n");
