@@ -9,72 +9,75 @@ import java.io.IOException;
 import java.util.HashSet;
 
 public class PageParser {
-    private Config config;
-    private HashSet<String> h1headers;
+    private final HashSet<String> headerlist;
 
-    public PageParser(Config config) {
-        this.config = config;
-        this.h1headers = new HashSet<String>();
+    public PageParser() {
+        this.headerlist = new HashSet<>();
     }
 
-    public void getH1Headers(String URL, String lang) {
+    public void getHeaders(String URL, int depth, boolean isSummary) {
         try {
             Document document = Jsoup.connect(URL).get();
 
-            Elements headers = document.select("h1");
+            Elements headers = document.select("h1, h2, h3");
+
+            int index = 0;
 
             for (Element header : headers){
                 String text = header.text();
 
-                if(!h1headers.contains(text)){
-                    System.out.println("# --> " + text);
-                    h1headers.add(text);
+                if(!headerlist.contains(text) && isSummary){
+                    routePrinter(URL, index);
+                    System.out.print(text);
+                    System.out.print("\n");
+                    headerlist.add(text);
+                    index++;
                 }
-
-                /*if(lang != null){
-                    System.out.println(TranslatorService.Translate(header.text(), lang));
+                else if(!headerlist.contains(text) && !isSummary){
+                    routePrinter(URL, index);
+                    for (int i = 0; i <= depth; i++) {
+                        System.out.print("-");
+                    }
+                    System.out.println("> " + text);
+                    headerlist.add(text);
+                    index++;
                 }
-                else{
-                    System.out.println(header.text());
-                }*/
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getH2Headers(String URL, String lang) {
-        try {
-            Document document = Jsoup.connect(URL).get();
-
-            Elements headers = document.select("h2");
-
-            for (Element header : headers){
-                String text = header.text();
-
-                if(!h1headers.contains(text)){
-                    System.out.println("## --> " + text);
-                    h1headers.add(text);
-                }
-
-                /*if(lang != null){
-                    System.out.println(TranslatorService.Translate(header.text(), lang));
-                }
-                else{
-                    System.out.println(header.text());
-                }*/
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void printSummary(String URL, String lang){
+    public void printSummary(String URL){
         System.out.println("Summary:\n");
 
-        getH1Headers(URL, lang);
-        /* Unneeded until I figure out how to sort subheaders below headers
-        getH2Headers(URL, lang);*/
+        getHeaders(URL, 0, true);
+        System.out.print("\n");
     }
 
+    public void routePrinter(String URL, int index){
+        Document document;
+
+        try {
+            document = Jsoup.connect(URL).get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Elements headers = document.select("h1, h2, h3");
+        Element header = headers.get(index);
+
+        if(header.is("h3")){
+            System.out.print("### ");
+        }
+        else if(header.is("h2")){
+            System.out.print("## ");
+        }
+        else if(header.is("h1")){
+            System.out.print("# ");
+        }
+        else{
+            System.out.print("X ");
+        }
+    }
 }
