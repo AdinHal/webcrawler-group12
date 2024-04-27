@@ -15,7 +15,7 @@ public class MarkdownGenerator {
         this.filePath = filePath;
     }
 
-    public void initFilePath() throws IOException {
+    public void init() throws IOException {
         if(filePath.trim().isEmpty() || filePath == null){
             System.out.println("No path provided by user. Creating temp directory.");
 
