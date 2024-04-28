@@ -73,7 +73,7 @@ public class CrawlerService {
         }
     }
 
-    private void writeResults() throws IOException {
+    private void writeResults() {
         for (String entry : markdownEntries) {
             markdownGenerator.writeEntries(entry);
         }
