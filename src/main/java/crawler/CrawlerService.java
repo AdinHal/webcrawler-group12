@@ -57,15 +57,18 @@ public class CrawlerService {
                         getPageLinks(absUrl, depth + 1);
                     }
                 } catch (URISyntaxException URI) {
+                    /* Commented out error print for now, will be used in the next phase of the development.
                     URI.printStackTrace();
+                     */
                     markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
                 }
             }
             String headersMarkdown = pageParser.getHeaders(URL, depth, false);
             markdownEntries.add("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
-            System.out.println("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            /* Commented out error print for now, will be used in the next phase of the development.
+                e.printStackTrace();
+             */
             markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
         }
     }
