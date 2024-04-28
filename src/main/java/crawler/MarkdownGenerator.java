@@ -3,6 +3,8 @@ package crawler;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 
 public class MarkdownGenerator {
 
@@ -36,12 +38,10 @@ public class MarkdownGenerator {
         printWriter = new PrintWriter(bufferedWriter);
     }
 
-    public void writeEntries(String url, String results){
-        printWriter.println("URL: "+url);
-        printWriter.println("Results: ");
-        printWriter.println(results);
-        printWriter.println("#########################################################");
+    public void writeEntries(Map<String, List<String>> crawlHeadersAndUrls, boolean isSummary){
+
     }
+
 
     public void close() throws IOException{
         printWriter.close();

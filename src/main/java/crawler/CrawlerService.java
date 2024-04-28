@@ -14,8 +14,8 @@ import java.util.Map;
 public class CrawlerService {
 
     private final Config config;
-    private final LinkValidator validator;
     private final PageParser pageParser;
+    private final LinkValidator validator;
     private Map<String,String> linksAndMessages;
     private MarkdownGenerator markdownGenerator;
 
@@ -54,7 +54,7 @@ public class CrawlerService {
                     linksAndMessages.put(absUrl, "Invalid URL.");
                 }
             }
-            pageParser.getHeaders(URL, depth, false);
+            System.out.print("<br>--> link to <a>"+URL+"</a>\n"+pageParser.getHeaders(URL, depth, false));
         } catch (IOException | URISyntaxException e) {
             System.err.println("For '" + URL + "': " + e.getMessage());
             linksAndMessages.put(URL, "For '" + URL + "': " + e.getMessage());

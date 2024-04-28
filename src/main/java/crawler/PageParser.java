@@ -9,75 +9,64 @@ import java.io.IOException;
 import java.util.HashSet;
 
 public class PageParser {
-    private final HashSet<String> headerlist;
+    private final HashSet<String> headerList;
 
     public PageParser() {
-        this.headerlist = new HashSet<>();
+        this.headerList = new HashSet<>();
     }
 
-    public void getHeaders(String URL, int depth, boolean isSummary) {
+    public String getHeaders(String URL, int depth, boolean isSummary) {
+        StringBuilder result = new StringBuilder();
         try {
             Document document = Jsoup.connect(URL).get();
-
             Elements headers = document.select("h1, h2, h3");
 
             int index = 0;
 
-            for (Element header : headers){
+            for (Element header : headers) {
                 String text = header.text();
 
-                if(!headerlist.contains(text) && isSummary){
-                    routePrinter(URL, index);
-                    System.out.print(text);
-                    System.out.print("\n");
-                    headerlist.add(text);
-                    index++;
-                }
-                else if(!headerlist.contains(text) && !isSummary){
-                    routePrinter(URL, index);
-                    for (int i = 0; i <= depth; i++) {
-                        System.out.print("-");
+                if (!headerList.contains(text)) {
+                    result.append(routePrinter(document, index));
+                    if (isSummary) {
+                        result.append(text).append("\n");
+                    } else {
+                        for (int i = 0; i <= depth; i++) {
+                            result.append("-");
+                        }
+                        result.append("> ").append(text).append("\n");
                     }
-                    System.out.println("> " + text);
-                    headerlist.add(text);
-                    index++;
+                    headerList.add(text);
                 }
+                index++;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return result.toString();
     }
 
     public void printSummary(String URL){
-        System.out.println("Summary:\n");
-
-        getHeaders(URL, 0, true);
+        System.out.println("input: <a>"+URL+"</a> ");
+        System.out.println("<br>depth:");
+        System.out.println("<br>summary:\n");
+        System.out.println(getHeaders(URL, 0, true));
         System.out.print("\n");
     }
 
-    public void routePrinter(String URL, int index){
-        Document document;
-
-        try {
-            document = Jsoup.connect(URL).get();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+    private String routePrinter(Document document, int index) {
         Elements headers = document.select("h1, h2, h3");
-        Element header = headers.get(index);
+        if (index < headers.size()) {
+            Element header = headers.get(index);
 
-        if(header.is("h3")){
-            System.out.print("### ");
+            if (header.is("h3")) {
+                return "### ";
+            } else if (header.is("h2")) {
+                return "## ";
+            } else if (header.is("h1")) {
+                return "# ";
+            }
         }
-        else if(header.is("h2")){
-            System.out.print("## ");
-        }
-        else if(header.is("h1")){
-            System.out.print("# ");
-        }
-        else{
-            System.out.print("X ");
-        }
+        return "X ";
     }
 }
