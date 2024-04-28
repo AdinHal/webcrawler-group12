@@ -10,10 +10,13 @@ import java.util.HashSet;
 
 public class PageParser {
     private final HashSet<String> headerList;
+    private MarkdownGenerator markdownGenerator;
 
-    public PageParser() {
+    public PageParser(MarkdownGenerator markdownGenerator) {
         this.headerList = new HashSet<>();
+        this.markdownGenerator = markdownGenerator;
     }
+
 
     public String getHeaders(String URL, int depth, boolean isSummary) {
         StringBuilder result = new StringBuilder();
@@ -47,11 +50,10 @@ public class PageParser {
     }
 
     public void printSummary(String URL){
-        System.out.println("input: <a>"+URL+"</a> ");
-        System.out.println("<br>depth:");
-        System.out.println("<br>summary:\n");
-        System.out.println(getHeaders(URL, 0, true));
-        System.out.print("\n");
+        markdownGenerator.writeEntries("input: <a>"+URL+"</a> ");
+        markdownGenerator.writeEntries("<br>depth:");
+        markdownGenerator.writeEntries("<br>summary:\n");
+        markdownGenerator.writeEntries(getHeaders(URL, 0, true)+"\n");
     }
 
     private String routePrinter(Document document, int index) {
@@ -68,5 +70,14 @@ public class PageParser {
             }
         }
         return "X ";
+    }
+
+    public void setupCrawler(String filePath) {
+        this.markdownGenerator = new MarkdownGenerator(filePath);
+        try {
+            this.markdownGenerator.init();
+        } catch (IOException e) {
+            System.err.println("Failed to initialize MDGenerator. Error: " + e.getMessage());
+        }
     }
 }

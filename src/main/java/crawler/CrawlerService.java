@@ -8,7 +8,9 @@ import org.jsoup.select.Elements;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CrawlerService {
@@ -16,24 +18,30 @@ public class CrawlerService {
     private final Config config;
     private final PageParser pageParser;
     private final LinkValidator validator;
-    private Map<String,String> linksAndMessages;
+    private List<String>markdownEntries;
+    private final Map<String,String> visitedLinks;
     private MarkdownGenerator markdownGenerator;
 
-    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, String filePath){
+    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, MarkdownGenerator markdownGenerator){
         this.config = config;
         this.validator = validator;
         this.pageParser = pageParser;
-        this.linksAndMessages = new HashMap<>();
-        setupCrawler(filePath);
+        this.visitedLinks = new HashMap<>();
+        this.markdownEntries = new ArrayList<>();
+        this.markdownGenerator = markdownGenerator;
+    }
+
+    public void startCrawling(String URL, int depth) throws IOException {
+        getPageLinks(URL, depth);
+        writeResults();
     }
 
     public void getPageLinks(String URL, int depth) {
-       if (depth > config.getCrawlDepth() + config.getCrawlAdditionalLinksDepth() || linksAndMessages.containsKey(URL)) {
+       if (depth > config.getCrawlDepth() + config.getCrawlAdditionalLinksDepth() || visitedLinks.containsKey(URL)) {
             return;
         }
 
-        //System.out.println("Fetching from: " + URL);
-        linksAndMessages.put(URL,"Fetching URL...");
+        visitedLinks.put(URL,"Fetching URL...");
 
         try {
             Document document = Jsoup.connect(URL).get();
@@ -45,36 +53,26 @@ public class CrawlerService {
                 try {
                     URI uri = new URI(absUrl);
                     String domain = uri.getHost();
-
-                    if (domain != null && domain.equals(baseDomain) && !linksAndMessages.containsKey(absUrl)) {
+                    if (domain != null && domain.equals(baseDomain) && !visitedLinks.containsKey(absUrl) && validator.isLinkReachable(absUrl)) {
                         getPageLinks(absUrl, depth + 1);
                     }
                 } catch (URISyntaxException URI) {
                     URI.printStackTrace();
-                    linksAndMessages.put(absUrl, "Invalid URL.");
+                    markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
                 }
             }
-            System.out.print("<br>--> link to <a>"+URL+"</a>\n"+pageParser.getHeaders(URL, depth, false));
+            String headersMarkdown = pageParser.getHeaders(URL, depth, false);
+            markdownEntries.add("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
+            System.out.println("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
         } catch (IOException | URISyntaxException e) {
-            System.err.println("For '" + URL + "': " + e.getMessage());
-            linksAndMessages.put(URL, "For '" + URL + "': " + e.getMessage());
+            e.printStackTrace();
+            markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
         }
     }
 
-    private void writeMDEntries() {
-        linksAndMessages.forEach((url, message) -> {
-            //markdownGenerator.writeEntries(url, message);
-        });
-        linksAndMessages.clear();
-    }
-
-
-    public void setupCrawler(String filePath) {
-        this.markdownGenerator = new MarkdownGenerator(filePath);
-        try {
-            this.markdownGenerator.init();
-        } catch (IOException e) {
-            System.err.println("Failed to initialize MDGenerator. Error: " + e.getMessage());
+    private void writeResults() throws IOException {
+        for (String entry : markdownEntries) {
+            markdownGenerator.writeEntries(entry);
         }
     }
 }

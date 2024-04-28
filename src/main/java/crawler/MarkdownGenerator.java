@@ -3,8 +3,6 @@ package crawler;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
 
 public class MarkdownGenerator {
 
@@ -17,35 +15,42 @@ public class MarkdownGenerator {
         this.filePath = filePath;
     }
 
+
     public void init() throws IOException {
-        if(filePath.trim().isEmpty() || filePath == null){
+        if (filePath == null || filePath.trim().isEmpty()) {
             System.out.println("No path provided by user. Creating temp directory.");
-
             Path folderPath = Files.createTempDirectory("tempFolder");
-            File tempFilePath = new File(folderPath.toFile(),"urls.md");
+            File tempFilePath = new File(folderPath.toFile(), "urls.md");
             filePath = tempFilePath.getAbsolutePath();
+            System.out.println("File path: " + filePath);
+        }
 
-            System.out.println("File path: "+filePath);
-        }else{
-            File file = new File(filePath);
-            if(!file.exists()){
-                file.getParentFile().mkdirs();
-                file.createNewFile();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+
+        fileWriter = new FileWriter(file, true);
+        bufferedWriter = new BufferedWriter(fileWriter);
+        printWriter = new PrintWriter(bufferedWriter, true);
+    }
+
+    public void writeEntries(String entry){
+        if (entry != null && !entry.isEmpty()) {
+            try {
+                printWriter.println(entry);
+                printWriter.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        fileWriter = new FileWriter(filePath, true);
-        bufferedWriter = new BufferedWriter(fileWriter);
-        printWriter = new PrintWriter(bufferedWriter);
     }
 
-    public void writeEntries(Map<String, List<String>> crawlHeadersAndUrls, boolean isSummary){
-
-    }
-
-
-    public void close() throws IOException{
-        printWriter.close();
-        bufferedWriter.close();
-        fileWriter.close();
+    public void close(){
+        if (printWriter != null) {
+            printWriter.close();
+        }
+        System.out.println("File closed");
     }
 }
