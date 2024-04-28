@@ -49,9 +49,9 @@ public class PageParser {
         return result.toString();
     }
 
-    public void printSummary(String URL){
+    public void printSummary(String URL, int depth){
         markdownGenerator.writeEntries("input: <a>"+URL+"</a> ");
-        markdownGenerator.writeEntries("<br>depth:");
+        markdownGenerator.writeEntries("<br>depth:"+depth);
         markdownGenerator.writeEntries("<br>summary:\n");
         markdownGenerator.writeEntries(getHeaders(URL, 0, true)+"\n");
     }

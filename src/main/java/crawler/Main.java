@@ -28,7 +28,7 @@ public class Main {
         LinkValidator validator = new LinkValidator();
         CrawlerService crawlerService = new CrawlerService(config, validator, pageParser,markdownGenerator);
 
-        pageParser.printSummary(config.getCrawlUrl());
+        pageParser.printSummary(config.getCrawlUrl(), config.getCrawlDepth());
         System.out.println("\nTraversing site...\n");
         crawlerService.startCrawling(config.getCrawlUrl(), config.getCrawlDepth());
         markdownGenerator.close();
