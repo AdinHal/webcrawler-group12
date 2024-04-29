@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashSet;
 
 public class PageParser {
@@ -20,6 +21,17 @@ public class PageParser {
 
     public String getHeaders(String URL, int depth, boolean isSummary) {
         StringBuilder result = new StringBuilder();
+        if (URL == null) {
+            throw new IllegalArgumentException("URL may not be null.");
+        }
+        if(URL.isEmpty()){
+            throw new IllegalArgumentException("URL may not be empty.");
+        }
+        try {
+            new java.net.URL(URL);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("URL is malformed: " + URL);
+        }
         try {
             Document document = Jsoup.connect(URL).get();
             Elements headers = document.select("h1, h2, h3");

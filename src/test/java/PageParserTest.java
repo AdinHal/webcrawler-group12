@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 
 
 public class PageParserTest {
@@ -84,6 +86,26 @@ public class PageParserTest {
     }
 
 
+    @Test
+    public void testGetHeadersSuccess(){
+        String url = "http://httpbin.org/html";
+
+        String getHeadersResponse = pageParser.getHeaders(url,0,false);
+        assertEquals("# -> Herman Melville - Moby-Dick\n",getHeadersResponse);
+    }
+
+    @Test
+    public void testGetHeadersThrowsWithInvalidURL(){
+        IllegalArgumentException nullThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders(null,0,false);});
+        assertTrue(nullThrown.getMessage().equals("URL may not be null."));
+
+        IllegalArgumentException emptyThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders("",0,false);});
+        assertTrue(emptyThrown.getMessage().equals("URL may not be empty."));
+
+        String malformedURL = "http://a b.com";
+        IllegalArgumentException urlNotReachableThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders(malformedURL,0,false);});
+        assertTrue(urlNotReachableThrown.getMessage().equals("URL is malformed: "+ malformedURL));
+    }
 
     @After
     public void testCleanUp(){
