@@ -56,7 +56,7 @@ public class PageParser {
         markdownGenerator.writeEntries(getHeaders(URL, 0, true)+"\n");
     }
 
-    private String routePrinter(Document document, int index) {
+    public String routePrinter(Document document, int index) {
         Elements headers = document.select("h1, h2, h3");
         if (index < headers.size()) {
             Element header = headers.get(index);
@@ -70,14 +70,5 @@ public class PageParser {
             }
         }
         return "X ";
-    }
-
-    public void setupCrawler(String filePath) {
-        this.markdownGenerator = new MarkdownGenerator(filePath);
-        try {
-            this.markdownGenerator.init();
-        } catch (IOException e) {
-            System.err.println("Failed to initialize MDGenerator. Error: " + e.getMessage());
-        }
     }
 }
