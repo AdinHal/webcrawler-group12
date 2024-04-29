@@ -4,6 +4,7 @@ import crawler.*;
 import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -66,5 +67,22 @@ public class MarkdownGeneratorTest {
         assertTrue("File should be empty since an empty string was written.",testFile.length() == 0);
     }
 
+    @Test
+    public void testCloseMDGenerator() throws IOException {
+        File testFile = Files.createTempDirectory("testDirectory").resolve("testOut.md").toFile();
+        markdownGenerator = new MarkdownGenerator(testFile.getAbsolutePath());
+        markdownGenerator.init();
+
+        PrintWriter testPrintWriter = markdownGenerator.printWriter;
+        testPrintWriter.println("TEST");
+        assertFalse("No error",testPrintWriter.checkError());
+
+        markdownGenerator.close();
+
+        testPrintWriter.println("TEST Post close");
+        testPrintWriter.flush();
+
+        assertTrue("PW Indicate error",testPrintWriter.checkError());
+    }
 
 }
