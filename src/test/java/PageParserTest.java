@@ -1,12 +1,15 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import crawler.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 
@@ -15,12 +18,15 @@ public class PageParserTest {
     private static PageParser pageParser;
     private static Document document;
     private static String dummyHTML;
+    private static MarkdownGenerator mockMarkdownGenerator;
 
-    @BeforeClass
-    public static void testSetUp() throws IOException {
+    @Before
+    public void testSetUp() throws IOException {
         dummyHTML = "<html><body><h1>H1</h1><h2>H2</h2><h3>H3</h3></body></html>";
         document = Jsoup.parse(dummyHTML);
         pageParser = new PageParser(null);
+
+        mockMarkdownGenerator= Mockito.mock(MarkdownGenerator.class);
     }
 
     @Test
@@ -50,9 +56,34 @@ public class PageParserTest {
     }
 
     @Test
-    public void testPrintSummary() throws IOException{
+    public void testPrintSummarySuccess(){
+        PageParser pParser = new PageParser(mockMarkdownGenerator);
+        /* https://stackoverflow.com/a/29612190/13667327
+         A spy is needed when an argument passed to when is not a mock.*/
+        PageParser parserSpy = spy(pParser);
 
+        String expectedGetHeadersResult = "Header\nHeaderToo\n";
+        Mockito.doReturn(expectedGetHeadersResult).when(parserSpy).getHeaders(anyString(), anyInt(), anyBoolean());
+
+        String testURL = "http://httpbin.org/html";
+        int testDepth = 0;
+        parserSpy.printSummary(testURL,testDepth);
+
+        verify(mockMarkdownGenerator).writeEntries("input: <a>" + testURL + "</a> ");
+        verify(mockMarkdownGenerator).writeEntries("<br>depth:" + testDepth);
+        verify(mockMarkdownGenerator).writeEntries("<br>summary:\n");
+        verify(mockMarkdownGenerator).writeEntries(expectedGetHeadersResult + "\n");
     }
+
+    @Test
+    public void testPrintSummaryWithInvalidURL(){
+        PageParser pParser = new PageParser(mockMarkdownGenerator);
+
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {pParser.printSummary(null,0);});
+        assertTrue(thrown.getMessage().equals("Must supply a valid URL"));
+    }
+
+
 
     @After
     public void testCleanUp(){
