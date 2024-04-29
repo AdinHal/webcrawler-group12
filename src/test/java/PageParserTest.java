@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
 
 
 public class PageParserTest {
