@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import crawler.*;
 import org.junit.AfterClass;
@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrawlerServiceTest {
     private static Config config;
@@ -33,8 +35,8 @@ public class CrawlerServiceTest {
 
     @Test
     public void testSuccessfulCrawl() throws IOException {
-        Mockito.when(validator.isLinkReachable(Mockito.anyString())).thenReturn(true);
-        Mockito.when(pageParser.getHeaders(Mockito.anyString(),Mockito.anyInt(),Mockito.anyBoolean())).thenReturn("MockHeader");
+        when(validator.isLinkReachable(Mockito.anyString())).thenReturn(true);
+        when(pageParser.getHeaders(Mockito.anyString(),Mockito.anyInt(),Mockito.anyBoolean())).thenReturn("MockHeader");
 
         crawler.startCrawling(config.getCrawlUrl(),0);
 
@@ -42,15 +44,30 @@ public class CrawlerServiceTest {
     }
 
     @Test
-    public void testFailedCrawl(){
-        Mockito.when(validator.isLinkReachable(Mockito.anyString())).thenReturn(false);
-        Mockito.when(pageParser.getHeaders(Mockito.anyString(),Mockito.anyInt(),Mockito.anyBoolean())).thenThrow(new IOException("Failed to fetch due to network error"));
+    public void testExceedsDepthFailedCrawl(){
+        String testUrl = "http://httpbin.org/html";
+        Config testConfig = Mockito.spy(config);
 
-        Exception exception = assertThrows(IOException.class, ()-> {crawler.startCrawling(config.getCrawlUrl(), 0);});
+        when(testConfig.getCrawlDepth()).thenReturn(3);
+        when(testConfig.getCrawlAdditionalLinksDepth()).thenReturn(2);
 
-        Mockito.verify(pageParser, Mockito.never()).getHeaders(Mockito.anyString(), Mockito.anyInt(), Mockito.anyBoolean());
+        crawler.startCrawling(testUrl, 4);
 
-        assertEquals("Failed to fetch due to network error", exception.getMessage());
+        assertTrue("Should be empty since no links are visited",crawler.visitedLinks.isEmpty());
+    }
+
+    @Test
+    public void testAlreadyVisitedURL(){
+        String testUrl = "http://httpbin.org/html";
+
+        Map<String, String> visitedLinks = new HashMap<>();
+        visitedLinks.put(testUrl, "Visited");
+
+        crawler.visitedLinks = visitedLinks;
+
+        crawler.startCrawling(testUrl, 1);
+
+        assertTrue("No new links should be added",visitedLinks.containsKey(testUrl) && visitedLinks.size() == 1);
     }
 
 

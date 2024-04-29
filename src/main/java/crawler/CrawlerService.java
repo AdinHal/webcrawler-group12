@@ -19,7 +19,7 @@ public class CrawlerService {
     private final PageParser pageParser;
     private final LinkValidator validator;
     private List<String>markdownEntries;
-    private final Map<String,String> visitedLinks;
+    public  Map<String,String> visitedLinks;
     private MarkdownGenerator markdownGenerator;
 
     public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, MarkdownGenerator markdownGenerator){
@@ -31,7 +31,7 @@ public class CrawlerService {
         this.markdownGenerator = markdownGenerator;
     }
 
-    public void startCrawling(String URL, int depth) throws IOException {
+    public void startCrawling(String URL, int depth){
         getPageLinks(URL, depth);
         writeResults();
     }
@@ -73,7 +73,7 @@ public class CrawlerService {
         }
     }
 
-    private void writeResults() {
+    public void writeResults() {
         for (String entry : markdownEntries) {
             markdownGenerator.writeEntries(entry);
         }
