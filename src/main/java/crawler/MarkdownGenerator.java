@@ -6,10 +6,10 @@ import java.nio.file.Path;
 
 public class MarkdownGenerator {
 
-    private PrintWriter printWriter;
+    public PrintWriter printWriter;
     private BufferedWriter bufferedWriter;
     private FileWriter fileWriter;
-    private String filePath;
+    public String filePath;
 
     public MarkdownGenerator(String filePath){
         this.filePath = filePath;
