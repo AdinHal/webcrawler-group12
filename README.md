@@ -9,21 +9,29 @@
   - URL:
       - Description: The starting URL from which the crawler will begin its operation.
       - Command: Enter the URL when prompted: Please enter the URL:
-      - Example: https://example.com
+      - **Example**: https://example.com
   - Crawl Depth:
       - Description: The maximum depth the crawler will traverse from the starting URL.
       - Command: Specify the depth when prompted: Please enter the Crawl depth
-      - Example: 3 (This would mean the crawler goes three levels deep from the starting page.)
+      - **Example**: 3
   - Domains to be Crawled:
       - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
       - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
-      - Example: example.com,sub.example.com
-  - Translation Language (Optional):
-      - Description: If specified, the text found during crawling will be translated into the chosen language.
-      - Command: Enter the language code when prompted, or press 'Enter' to skip: Please enter the language the text should be translated to (Optional* -> Press 'Enter' if You want to skip):
-      - Example: fr (French), Leave blank to skip translation.
+      - **Example**: example.com,sub.example.com
+  - Additional links depth _(Optional)_:
+    - Description: The maximum depth the crawler will traverse for the additionally found URL.
+    - Command: Specify the depth when prompted: Define the depth for additional links
+    - **Example**: 2 | **Default**: 2
+  - Path for the MD file _(Optional)_:
+    - Description: Allows the crawler to store the summary file in a specific path. If no path is defined the results are being stored in a temp directory.
+    - Command: Enter the path when prompted, Enter the path where the .md File should be stored. Will be stored under temp as per default:
+    - **Example**: C:\Users\User\AppData\Local\Temp\tempFolder3885246162413379470\
 
 ## Run / Setup
+
+Which website can You use? 
+- `Test Website`: https://webscraper.io/test-sites/e-commerce/allinone
+- `Arguments` : `arg1=URL; arg2:Depth; arg3:Domains; arg4:Additional Links Depth; arg5:Path;`
 
 `Through IntelliJ`
 
@@ -49,7 +57,7 @@ java -cp src/main/java crawler.Main
 ```
 3. Running with Arguments:
 ```bat
-java -cp src/main/java crawler.Main arg1 arg2 arg3
+java -cp src/main/java crawler.Main arg1 arg2 arg3 arg4
 ```
 
 Read more: [WikiHow](https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt#:~:text=At%20the%20command%20prompt%2C%20type,program%20after%20it%20is%20compiled.)
@@ -72,7 +80,7 @@ java -cp src/main/java crawler.Main
 ```
 5. Passing Arguments
 ```bat
-java -cp src/main/java crawler.Main arg1 arg2 arg3
+java -cp src/main/java crawler.Main arg1 arg2 arg3 arg4
 ```
 
 Read more : [StackOverflow Answer](https://stackoverflow.com/a/2361108/13667327)

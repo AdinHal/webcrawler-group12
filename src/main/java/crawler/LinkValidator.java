@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LinkValidator {
-    boolean isLinkReachable(String link) {
+   public boolean isLinkReachable(String link) {
         try {
             URL url = new URL(link);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

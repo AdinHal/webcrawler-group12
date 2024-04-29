@@ -5,84 +5,77 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CrawlerService {
 
     private final Config config;
-    private final LinkValidator validator;
     private final PageParser pageParser;
-    private final HashSet<String> links;
+    private final LinkValidator validator;
+    private List<String>markdownEntries;
+    public  Map<String,String> visitedLinks;
+    private MarkdownGenerator markdownGenerator;
 
-    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser){
+    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, MarkdownGenerator markdownGenerator){
         this.config = config;
         this.validator = validator;
         this.pageParser = pageParser;
-        this.links = new HashSet<String>();
+        this.visitedLinks = new HashMap<>();
+        this.markdownEntries = new ArrayList<>();
+        this.markdownGenerator = markdownGenerator;
     }
 
-    private void saveUrl(String url) throws IOException {
-        // the assignment specification does not say if we have to write it inside the .md file or in a separate text file - path can be changed
-        String filePath = "crawledURLs.txt";
-
-        try(FileWriter fileWriter = new FileWriter(filePath,true)){
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            PrintWriter printWriter = new PrintWriter(bufferedWriter);
-            printWriter.println(url);
-        }catch (IOException ioException){
-            System.err.println("URL could not be saved: "+url);
-            ioException.printStackTrace();
-        }
-
+    public void startCrawling(String URL, int depth){
+        getPageLinks(URL, depth);
+        writeResults();
     }
 
-    public void getPageLinks(String URL) {
-        int depth = 0;
-
-        int maxdepth = config.getCrawlDepth();
-        if (depth > maxdepth || links.contains(URL)) {
+    public void getPageLinks(String URL, int depth) {
+       if (depth > config.getCrawlDepth() + config.getCrawlAdditionalLinksDepth() || visitedLinks.containsKey(URL)) {
             return;
         }
 
-        String userDomain = config.getCrawlDomains().get(0);
+        visitedLinks.put(URL,"Fetching URL...");
 
-        System.out.println("Fetching from: " + URL);
         try {
-            links.add(URL);
-
             Document document = Jsoup.connect(URL).get();
-
             Elements linksOnPage = document.select("a[href]");
+            String baseDomain = new URI(URL).getHost();
 
             for (Element page : linksOnPage) {
                 String absUrl = page.absUrl("href");
                 try {
                     URI uri = new URI(absUrl);
                     String domain = uri.getHost();
-
-                    if(domain != null && domain.equals(userDomain)){
-                        if (validator.isLinkReachable(absUrl)) {
-                            pageParser.getHeaders(URL, maxdepth, false);
-                            getPageLinks(absUrl);
-                        }
-                        else{
-                            System.out.println("Broken link: " + absUrl);
-                        }
-
+                    if (domain != null && domain.equals(baseDomain) && !visitedLinks.containsKey(absUrl) && validator.isLinkReachable(absUrl)) {
+                        getPageLinks(absUrl, depth + 1);
                     }
                 } catch (URISyntaxException URI) {
+                    /* Commented out error print for now, will be used in the next phase of the development.
                     URI.printStackTrace();
+                     */
+                    markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
                 }
             }
-            pageParser.getHeaders(URL, depth, false);
-        } catch (IOException e) {
-            System.err.println("For '" + URL + "': " + e.getMessage());
+            String headersMarkdown = pageParser.getHeaders(URL, depth, false);
+            markdownEntries.add("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
+        } catch (IOException | URISyntaxException e) {
+            /* Commented out error print for now, will be used in the next phase of the development.
+                e.printStackTrace();
+             */
+            markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
+        }
+    }
+
+    public void writeResults() {
+        for (String entry : markdownEntries) {
+            markdownGenerator.writeEntries(entry);
         }
     }
 }
