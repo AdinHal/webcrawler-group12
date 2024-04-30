@@ -18,9 +18,9 @@ public class CrawlerService {
     private final Config config;
     private final PageParser pageParser;
     private final LinkValidator validator;
-    private List<String>markdownEntries;
+    private final List<String>markdownEntries;
     public  Map<String,String> visitedLinks;
-    private MarkdownGenerator markdownGenerator;
+    private final MarkdownGenerator markdownGenerator;
 
     public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, MarkdownGenerator markdownGenerator){
         this.config = config;
@@ -64,7 +64,7 @@ public class CrawlerService {
                 }
             }
             String headersMarkdown = pageParser.getHeaders(URL, depth, false);
-            markdownEntries.add("<br>--> link to <a>"+URL+"</a>\n"+headersMarkdown);
+            markdownEntries.add("<br>--> link to <a>" + URL + "</a>\n"+headersMarkdown);
         } catch (IOException | URISyntaxException e) {
             /* Commented out error print for now, will be used in the next phase of the development.
                 e.printStackTrace();
