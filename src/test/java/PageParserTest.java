@@ -1,9 +1,5 @@
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-import crawler.*;
+import crawler.MarkdownGenerator;
+import crawler.PageParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.After;
@@ -11,7 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 
 public class PageParserTest {
@@ -21,7 +21,7 @@ public class PageParserTest {
     private static MarkdownGenerator mockMarkdownGenerator;
 
     @Before
-    public void testSetUp() throws IOException {
+    public void testSetUp() {
         dummyHTML = "<html><body><h1>H1</h1><h2>H2</h2><h3>H3</h3></body></html>";
         document = Jsoup.parse(dummyHTML);
         pageParser = new PageParser(null);
@@ -80,7 +80,7 @@ public class PageParserTest {
         PageParser pParser = new PageParser(mockMarkdownGenerator);
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {pParser.printSummary(null,0);});
-        assertTrue(thrown.getMessage().equals("Must supply a valid URL"));
+        assertEquals("Must supply a valid URL", thrown.getMessage());
     }
 
 
@@ -95,14 +95,14 @@ public class PageParserTest {
     @Test
     public void testGetHeadersThrowsWithInvalidURL(){
         IllegalArgumentException nullThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders(null,0,false);});
-        assertTrue(nullThrown.getMessage().equals("URL may not be null."));
+        assertEquals("URL may not be null.", nullThrown.getMessage());
 
         IllegalArgumentException emptyThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders("",0,false);});
-        assertTrue(emptyThrown.getMessage().equals("URL may not be empty."));
+        assertEquals("URL may not be empty.", emptyThrown.getMessage());
 
         String malformedURL = "http://a b.com";
         IllegalArgumentException urlNotReachableThrown = assertThrows(IllegalArgumentException.class, ()-> {pageParser.getHeaders(malformedURL,0,false);});
-        assertTrue(urlNotReachableThrown.getMessage().equals("URL is malformed: "+ malformedURL));
+        assertEquals(urlNotReachableThrown.getMessage(), "URL is malformed: " + malformedURL);
     }
 
     @After

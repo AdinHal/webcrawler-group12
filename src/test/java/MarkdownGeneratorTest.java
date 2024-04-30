@@ -1,12 +1,12 @@
-import static org.junit.Assert.*;
-
-import crawler.*;
+import crawler.MarkdownGenerator;
 import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
+
+import static org.junit.Assert.*;
 
 
 public class MarkdownGeneratorTest {
@@ -30,8 +30,7 @@ public class MarkdownGeneratorTest {
 
         markdownGenerator.init();
 
-        assertNotNull(markdownGenerator.filePath, "File path should not be null");
-        assertTrue("The file should exist",new File(markdownGenerator.filePath).exists());
+       assertTrue("The file should exist",new File(markdownGenerator.filePath).exists());
     }
 
     @Test
@@ -54,7 +53,7 @@ public class MarkdownGeneratorTest {
 
         markdownGenerator.writeEntries("");
 
-        assertTrue("File is empty because an empty string was passed.",testFile.length() == 0);
+        assertEquals("File is empty because an empty string was passed.", 0, testFile.length());
     }
 
     @Test
@@ -64,7 +63,7 @@ public class MarkdownGeneratorTest {
 
         markdownGenerator.writeEntries(null);
 
-        assertTrue("File should be empty since an empty string was written.",testFile.length() == 0);
+        assertEquals("File should be empty since an empty string was written.", 0, testFile.length());
     }
 
     @Test

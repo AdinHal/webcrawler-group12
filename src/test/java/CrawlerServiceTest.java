@@ -34,7 +34,7 @@ public class CrawlerServiceTest {
     }
 
     @Test
-    public void testSuccessfulCrawl() throws IOException {
+    public void testSuccessfulCrawl() {
         when(validator.isLinkReachable(Mockito.anyString())).thenReturn(true);
         when(pageParser.getHeaders(Mockito.anyString(),Mockito.anyInt(),Mockito.anyBoolean())).thenReturn("MockHeader");
 
