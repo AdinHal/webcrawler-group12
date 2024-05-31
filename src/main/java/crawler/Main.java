@@ -1,5 +1,7 @@
 package crawler;
 
+import crawler.util.InputHandler;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +11,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        String crawl_url = getInput(args, 0, scanner, "Enter the URL to be crawled:");
-        int crawl_depth = Integer.parseInt(getInput(args, 1, scanner, "Enter the crawl depth: "));
-        String crawl_domains = getInput(args, 2, scanner, "Enter the domains to be crawled (comma-separated, no spaces):");
-        String additionalLinksDepth = getInput(args, 3, scanner, "Define the depth for additional links", true);
-        String crawledURLsPath = getInput(args,4,scanner,"Enter the path where the .md File should be stored. Will be stored under temp as per default",true);
+        String crawl_url = InputHandler.getInput(args, 0, scanner, "Enter the URL to be crawled:");
+        int crawl_depth = Integer.parseInt(InputHandler.getInput(args, 1, scanner, "Enter the crawl depth: "));
+        String crawl_domains = InputHandler.getInput(args, 2, scanner, "Enter the domains to be crawled (comma-separated, no spaces):");
+        String additionalLinksDepth = InputHandler.getInput(args, 3, scanner, "Define the depth for additional links", true);
+        String crawledURLsPath = InputHandler.getInput(args,4,scanner,"Enter the path where the .md File should be stored. Will be stored under temp as per default",true);
 
         scanner.close();
 
@@ -33,21 +35,4 @@ public class Main {
         crawlerService.startCrawling(config.getCrawlUrl(), config.getCrawlDepth());
         markdownGenerator.close();
     }
-
-    private static String getInput(String[] args, int index, Scanner scanner, String message) {
-        return getInput(args, index, scanner, message, false);
-    }
-
-    private static String getInput(String[] args, int index, Scanner scanner, String message, boolean optional) {
-        if (args.length > index && !args[index].isEmpty()) {
-            return args[index];
-        }
-        if (optional) {
-            System.out.println(message + " (Optional* -> Press 'Enter' if you want to skip):");
-        } else {
-            System.out.println(message);
-        }
-        return scanner.nextLine();
-    }
-
 }
