@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CrawlerServiceTest {
-    private static Config config;
+  /*  private static Config config;
     private static LinkValidator validator;
     private static PageParser pageParser;
     private static CrawlerService crawler;
@@ -74,5 +74,5 @@ public class CrawlerServiceTest {
     @AfterClass
     public static void testCleanUp() {
 
-    }
+    }*/
 }

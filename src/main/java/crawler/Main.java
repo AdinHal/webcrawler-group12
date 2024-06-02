@@ -1,5 +1,6 @@
 package crawler;
 
+import crawler.models.CrawledPage;
 import crawler.util.InputHandler;
 
 import java.io.IOException;
@@ -15,24 +16,16 @@ public class Main {
         int crawlDepth = Integer.parseInt(InputHandler.getInput(args, 1, inputScanner, "Enter the crawl depth: "));
         String domainsToCrawl = InputHandler.getInput(args, 2, inputScanner, "Enter the domains to be crawled (comma-separated, no spaces):");
         String additionalLinksDepth = InputHandler.getInput(args, 3, inputScanner, "Define the depth for additional links", true);
-        String outputFilePath = InputHandler.getInput(args, 4, inputScanner, "Enter the path where the .md File should be stored. Will be stored under temp as per default", true);
 
         inputScanner.close();
 
         int additionalLinksCrawlDepth = additionalLinksDepth.isEmpty() ? 2 : Integer.parseInt(additionalLinksDepth);
 
-        MarkdownGenerator markdownGenerator = new MarkdownGenerator(outputFilePath);
-        markdownGenerator.init();
+        CrawlerConfig config = new CrawlerConfig(urlToCrawl, crawlDepth, Arrays.asList(domainsToCrawl.split(",")), additionalLinksCrawlDepth);
+        URLHandler urlProcessor = new URLHandler(config);
+        List<CrawledPage> crawledPages = urlProcessor.process();
 
-        List<String> crawlDomainsList = Arrays.asList(domainsToCrawl.split(","));
-        Config crawlConfig = new Config(urlToCrawl, crawlDepth, additionalLinksCrawlDepth, crawlDomainsList);
-        PageParser pageParser = new PageParser(markdownGenerator);
-        LinkValidator linkValidator = new LinkValidator();
-        CrawlerService crawlerService = new CrawlerService(crawlConfig, linkValidator, pageParser, markdownGenerator);
-
-        pageParser.printSummary(crawlConfig.getCrawlUrl(), crawlConfig.getCrawlDepth());
-        System.out.println("\nTraversing site...\n");
-        crawlerService.startCrawling(crawlConfig.getCrawlUrl(), crawlConfig.getCrawlDepth());
-        markdownGenerator.close();
+        MarkdownReport writer = new MarkdownReport();
+        writer.write(crawledPages, config.getStartUrl(), config.getMaxDepth(), config.getAdditionalLinksCrawlDepth());
     }
 }
