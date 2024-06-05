@@ -5,7 +5,7 @@ import java.util.List;
 public class Config {
 
     private final String crawlUrl;
-    private final int crawlDepth;
+    private int crawlDepth;
     private final List<String> crawlDomains;
     private final int crawlAdditionalLinksDepth;
 
@@ -19,6 +19,10 @@ public class Config {
 
     public String getCrawlUrl() {
         return crawlUrl;
+    }
+
+    public void setCrawlDepth(int crawlDepth) {
+        this.crawlDepth = crawlDepth;
     }
 
     public int getCrawlAdditionalLinksDepth(){return crawlAdditionalLinksDepth;}
