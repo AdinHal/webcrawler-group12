@@ -1,62 +1,48 @@
 package crawler;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.HashSet;
 
 public class PageParser {
     private final HashSet<String> headerList;
-    private MarkdownGenerator markdownGenerator;
+    private final MarkdownGenerator markdownGenerator;
+    private final URLHandler urlHandler;
 
     public PageParser(MarkdownGenerator markdownGenerator) {
         this.headerList = new HashSet<>();
         this.markdownGenerator = markdownGenerator;
+        this.urlHandler = new URLHandler();
     }
-
 
     public String getHeaders(String URL, int depth, boolean isSummary) {
         StringBuilder result = new StringBuilder();
-        if (URL == null) {
-            throw new IllegalArgumentException("URL may not be null.");
-        }
-        if(URL.isEmpty()){
-            throw new IllegalArgumentException("URL may not be empty.");
-        }
-        try {
-            new java.net.URL(URL);
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException("URL is malformed: " + URL);
-        }
-        try {
-            Document document = Jsoup.connect(URL).get();
-            Elements headers = document.select("h1, h2, h3");
 
-            int index = 0;
+        urlHandler.checkURLExceptions(URL);
 
-            for (Element header : headers) {
-                String text = header.text();
+        Document document = urlHandler.connectToURL(URL);
+        Elements headers = urlHandler.extractFromURL(document, "h1, h2, h3");
 
-                if (!headerList.contains(text)) {
-                    result.append(routePrinter(document, index));
-                    if (isSummary) {
-                        result.append(text).append("\n");
-                    } else {
-                        for (int i = 0; i <= depth; i++) {
-                            result.append("-");
-                        }
-                        result.append("> ").append(text).append("\n");
+        int index = 0;
+
+        for (Element header : headers) {
+            String text = header.text();
+
+            if (!headerList.contains(text)) {
+                result.append(routePrinter(document, index));
+                if (isSummary) {
+                    result.append(text).append("\n");
+                } else {
+                    for (int i = 0; i <= depth; i++) {
+                        result.append("-");
                     }
-                    headerList.add(text);
+                    result.append("> ").append(text).append("\n");
                 }
-                index++;
+                headerList.add(text);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            index++;
         }
         return result.toString();
     }
@@ -69,7 +55,7 @@ public class PageParser {
     }
 
     public String routePrinter(Document document, int index) {
-        Elements headers = document.select("h1, h2, h3");
+        Elements headers = urlHandler.extractFromURL(document, "h1, h2, h3");
         if (index < headers.size()) {
             Element header = headers.get(index);
 

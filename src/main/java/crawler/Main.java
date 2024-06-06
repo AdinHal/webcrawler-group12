@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        String crawl_url = getInput(args, 0, scanner, "Enter the URL to be crawled:");
-        int crawl_depth = Integer.parseInt(getInput(args, 1, scanner, "Enter the crawl depth: "));
-        String crawl_domains = getInput(args, 2, scanner, "Enter the domains to be crawled (comma-separated, no spaces):");
+        String crawl_url = getInput(args, 0, scanner, "Enter the URL to be crawled:", false);
+        int crawl_depth = Integer.parseInt(getInput(args, 1, scanner, "Enter the crawl depth: ", false));
+        String crawl_domains = getInput(args, 2, scanner, "Enter the domains to be crawled (comma-separated, no spaces):", false);
         String additionalLinksDepth = getInput(args, 3, scanner, "Define the depth for additional links", true);
         String crawledURLsPath = getInput(args,4,scanner,"Enter the path where the .md File should be stored. Will be stored under temp as per default",true);
 
@@ -25,17 +25,13 @@ public class Main {
         List<String> crawlDomainsList = Arrays.asList(crawl_domains.split(","));
         Config config = new Config(crawl_url, crawl_depth, crawlAdditionalLinks_depth, crawlDomainsList);
         PageParser pageParser = new PageParser(markdownGenerator);
-        LinkValidator validator = new LinkValidator();
-        CrawlerService crawlerService = new CrawlerService(config, validator, pageParser,markdownGenerator);
+        URLHandler urlHandler = new URLHandler();
+        CrawlerService crawlerService = new CrawlerService(config, urlHandler, pageParser, markdownGenerator);
 
         pageParser.printSummary(config.getCrawlUrl(), config.getCrawlDepth());
         System.out.println("\nTraversing site...\n");
         crawlerService.startCrawling(config.getCrawlUrl(), config.getCrawlDepth());
         markdownGenerator.close();
-    }
-
-    private static String getInput(String[] args, int index, Scanner scanner, String message) {
-        return getInput(args, index, scanner, message, false);
     }
 
     private static String getInput(String[] args, int index, Scanner scanner, String message, boolean optional) {

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CrawlerServiceTest {
     private static Config config;
-    private static LinkValidator validator;
+    private static URLHandler urlHandler;
     private static PageParser pageParser;
     private static CrawlerService crawler;
     private static MarkdownGenerator markdownGenerator;
@@ -22,7 +22,7 @@ public class CrawlerServiceTest {
     @BeforeClass
     public static void testSetUp() throws IOException {
         config = new Config("https://webscraper.io/test-sites/e-commerce/allinone",2,1, Arrays.asList("allinone"));
-        validator = Mockito.mock(LinkValidator.class);
+        urlHandler = Mockito.mock(URLHandler.class);
         pageParser = Mockito.mock(PageParser.class);
         markdownGenerator = Mockito.mock(MarkdownGenerator.class);
 
@@ -30,12 +30,12 @@ public class CrawlerServiceTest {
         Mockito.doNothing().when(markdownGenerator).writeEntries(Mockito.anyString());
         Mockito.doNothing().when(markdownGenerator).close();
 
-        crawler = new CrawlerService(config,validator,pageParser,markdownGenerator);
+        crawler = new CrawlerService(config, urlHandler, pageParser, markdownGenerator);
     }
 
     @Test
     public void testSuccessfulCrawl() {
-        when(validator.isLinkReachable(Mockito.anyString())).thenReturn(true);
+        when(urlHandler.isLinkReachable(Mockito.anyString())).thenReturn(true);
         when(pageParser.getHeaders(Mockito.anyString(),Mockito.anyInt(),Mockito.anyBoolean())).thenReturn("MockHeader");
 
         crawler.startCrawling(config.getCrawlUrl(),0);

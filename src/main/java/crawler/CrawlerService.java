@@ -1,11 +1,9 @@
 package crawler;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -17,15 +15,15 @@ public class CrawlerService {
 
     private final Config config;
     private final PageParser pageParser;
-    private final LinkValidator validator;
     private final List<String>markdownEntries;
     public  Map<String,String> visitedLinks;
     private final MarkdownGenerator markdownGenerator;
+    private final URLHandler urlHandler;
 
-    public CrawlerService(Config config, LinkValidator validator, PageParser pageParser, MarkdownGenerator markdownGenerator){
+    public CrawlerService(Config config, URLHandler urlHandler, PageParser pageParser, MarkdownGenerator markdownGenerator){
         this.config = config;
-        this.validator = validator;
         this.pageParser = pageParser;
+        this.urlHandler = urlHandler;
         this.visitedLinks = new HashMap<>();
         this.markdownEntries = new ArrayList<>();
         this.markdownGenerator = markdownGenerator;
@@ -44,8 +42,9 @@ public class CrawlerService {
         visitedLinks.put(URL,"Fetching URL...");
 
         try {
-            Document document = Jsoup.connect(URL).get();
-            Elements linksOnPage = document.select("a[href]");
+            Document document = urlHandler.connectToURL(URL);
+            Elements linksOnPage = urlHandler.extractFromURL(document, "a[href]");
+
             String baseDomain = new URI(URL).getHost();
 
             for (Element page : linksOnPage) {
@@ -53,22 +52,16 @@ public class CrawlerService {
                 try {
                     URI uri = new URI(absUrl);
                     String domain = uri.getHost();
-                    if (domain != null && domain.equals(baseDomain) && !visitedLinks.containsKey(absUrl) && validator.isLinkReachable(absUrl)) {
+                    if (domain != null && domain.equals(baseDomain) && !visitedLinks.containsKey(absUrl) && urlHandler.isLinkReachable(absUrl)) {
                         getPageLinks(absUrl, depth + 1);
                     }
                 } catch (URISyntaxException URI) {
-                    /* Commented out error print for now, will be used in the next phase of the development.
-                    URI.printStackTrace();
-                     */
                     markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
                 }
             }
             String headersMarkdown = pageParser.getHeaders(URL, depth, false);
             markdownEntries.add("<br>--> link to <a>" + URL + "</a>\n"+headersMarkdown);
-        } catch (IOException | URISyntaxException e) {
-            /* Commented out error print for now, will be used in the next phase of the development.
-                e.printStackTrace();
-             */
+        } catch (URISyntaxException e) {
             markdownEntries.add("<br>--> broken link <a>" + URL + "</a>");
         }
     }
