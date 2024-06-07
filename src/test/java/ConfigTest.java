@@ -1,13 +1,12 @@
-/*import crawler.Config;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ConfigTest {
-
+/*
     @Test
     public void testConfigInit(){
         String testCrawlURL = "http://httpbin.org/html";
@@ -23,6 +22,5 @@ public class ConfigTest {
                 () -> assertEquals(testAdditionalDepth, config.getCrawlAdditionalLinksDepth(), "should match"),
                 () -> assertEquals(testDomains, config.getCrawlDomains(), "should match")
         );
-    }
+    }*/
 }
-*/

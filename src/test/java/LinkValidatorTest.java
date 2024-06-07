@@ -1,4 +1,3 @@
-/*import crawler.LinkValidator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -6,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LinkValidatorTest {
 
-    LinkValidator linkValidator = new LinkValidator();
+/*    LinkValidator linkValidator = new LinkValidator();
 
     @Test
     public void testLVSuccess() {
@@ -20,6 +19,5 @@ public class LinkValidatorTest {
         String URL = "https://www.hdajsdhjkashfkahkfjhjafhs.at";
 
         assertFalse(linkValidator.isLinkReachable(URL));
-    }
+    }*/
 }
-*/

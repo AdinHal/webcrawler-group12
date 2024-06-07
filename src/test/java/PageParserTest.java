@@ -1,5 +1,3 @@
-/*import crawler.MarkdownGenerator;
-import crawler.PageParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.After;
@@ -15,7 +13,7 @@ import static org.mockito.Mockito.verify;
 
 
 public class PageParserTest {
-    private static PageParser pageParser;
+   /* private static PageParser pageParser;
     private static Document document;
     private static String dummyHTML;
     private static MarkdownGenerator mockMarkdownGenerator;
@@ -58,9 +56,9 @@ public class PageParserTest {
     @Test
     public void testPrintSummarySuccess(){
         PageParser pParser = new PageParser(mockMarkdownGenerator);
-        https://stackoverflow.com/a/29612190/13667327
-         A spy is needed when an argument passed to when is not a mock.
-        PageParser parserSpy = spy(pParser);
+        /* https://stackoverflow.com/a/29612190/13667327
+         A spy is needed when an argument passed to when is not a mock.*/
+        /*PageParser parserSpy = spy(pParser);
 
         String expectedGetHeadersResult = "Header\nHeaderToo\n";
         Mockito.doReturn(expectedGetHeadersResult).when(parserSpy).getHeaders(anyString(), anyInt(), anyBoolean());
@@ -110,6 +108,5 @@ public class PageParserTest {
         pageParser = null;
         document = null;
         dummyHTML = null;
-    }
+    }*/
 }
-*/
