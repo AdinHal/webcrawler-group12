@@ -4,12 +4,11 @@ import crawler.FileWriterSingleton;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedWriter;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileWriterSingletonTest {
     private FileWriterSingleton fileWriterSingleton;
@@ -45,5 +44,17 @@ public class FileWriterSingletonTest {
         FileWriterSingleton instance1 = FileWriterSingleton.getInstance();
         FileWriterSingleton instance2 = FileWriterSingleton.getInstance();
         assertSame(instance1, instance2, "Both instances should be the same");
+    }
+
+    @Test
+    void testWriteContent() {
+        String testContent = "Test content\n";
+        fileWriterSingleton.write(testContent);
+        try {
+            verify(mockBufferedWriter, times(1)).write(testContent);
+            verify(mockBufferedWriter, times(1)).flush();
+        } catch (IOException e) {
+            fail("IOException should not occur", e);
+        }
     }
 }
