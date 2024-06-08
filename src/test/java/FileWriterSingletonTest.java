@@ -57,4 +57,14 @@ public class FileWriterSingletonTest {
             fail("IOException should not occur", e);
         }
     }
+
+    @Test
+    void testClose() {
+        fileWriterSingleton.close();
+        try {
+            verify(mockBufferedWriter, times(1)).close();
+        } catch (IOException e) {
+            fail("IOException should not occur", e);
+        }
+    }
 }
