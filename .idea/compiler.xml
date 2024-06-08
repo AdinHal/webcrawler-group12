@@ -9,8 +9,5 @@
         <module name="webcrawler-group12" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="webcrawler-group12" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

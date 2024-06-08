@@ -1,14 +1,15 @@
 package crawler;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.net.URI;
+import java.util.List;
+import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+
 
 public class URLHandler {
 
@@ -16,8 +17,8 @@ public class URLHandler {
         return document.select(tag);
     }
 
-    public static Document requestLinkAccess(String urlToCrawl, int depth, ArrayList<String> visited, boolean isInitialPage) {
-        FileWriter writer = FileWriter.getInstance();
+    public static Document requestLinkAccess(String urlToCrawl, int depth, List<String> visited, boolean isInitialPage) {
+        FileWriterSingleton writer = FileWriterSingleton.getInstance();
         try {
             Connection connection = Jsoup.connect(urlToCrawl);
             Document document = connection.get();
@@ -29,12 +30,12 @@ public class URLHandler {
                     writer.write("input: <a>" + urlToCrawl + "</a>\n");
                     writer.write("depth: " + depth + "\n");
                     writer.write("summary:\n");
-                    FileWriter.printHeaders(document, " ");
+                    FileWriterSingleton.printHeaders(document, " ");
                     visited.add(urlToCrawl);
                 } else {
                     writer.write("<br> --> link to <a>" + urlToCrawl + "</a>\n");
 
-                    FileWriter.printHeaders(document, " " + depthDash.repeat(depth) + " > ");
+                    FileWriterSingleton.printHeaders(document, " " + depthDash.repeat(depth) + " > ");
                     writer.write("<br>\n");
                     visited.add(urlToCrawl);
                 }
