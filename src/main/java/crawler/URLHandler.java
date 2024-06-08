@@ -22,17 +22,19 @@ public class URLHandler {
             Connection connection = Jsoup.connect(urlToCrawl);
             Document document = connection.get();
 
+            String depthDash = "-";
+
             if (connection.response().statusCode() == 200) {
                 if (isInitialPage) {
                     writer.write("input: <a>" + urlToCrawl + "</a>\n");
                     writer.write("depth: " + depth + "\n");
                     writer.write("summary:\n");
-                    FileWriter.printHeaders(document, "");
+                    FileWriter.printHeaders(document, " ");
                     visited.add(urlToCrawl);
                 } else {
                     writer.write("<br> --> link to <a>" + urlToCrawl + "</a>\n");
-                    //TODO: Print more dashes the deeper the crawler goes (Depth: 3 gives ---)
-                    FileWriter.printHeaders(document, " --> ");
+
+                    FileWriter.printHeaders(document, " " + depthDash.repeat(depth) + " > ");
                     writer.write("<br>\n");
                     visited.add(urlToCrawl);
                 }
