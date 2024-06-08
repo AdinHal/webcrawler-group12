@@ -1,4 +1,4 @@
-import org.junit.Test;
+/*import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,5 +22,5 @@ public class ConfigTest {
                 () -> assertEquals(testAdditionalDepth, config.getCrawlAdditionalLinksDepth(), "should match"),
                 () -> assertEquals(testDomains, config.getCrawlDomains(), "should match")
         );
-    }*/
-}
+    }
+}*/

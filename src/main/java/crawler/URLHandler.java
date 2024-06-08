@@ -1,46 +1,61 @@
 package crawler;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
 
 public class URLHandler {
-    public Document connectToURL(String URL){
-        try {
-            return Jsoup.connect(URL).get();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public Elements extractFromURL(Document document, String tag) {
         return document.select(tag);
     }
 
-    public boolean isLinkReachable(String link) {
+    public static Document requestLinkAccess(String urlToCrawl, int depth, ArrayList<String> visited, boolean isInitialPage) {
+        FileWriter writer = FileWriter.getInstance();
         try {
-            URL url = new URI(link).toURL();
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("HEAD");
-            int responseCode = connection.getResponseCode();
-            return (responseCode == HttpURLConnection.HTTP_OK);
-        } catch (IOException | URISyntaxException e) {
-            return false;
+            Connection connection = Jsoup.connect(urlToCrawl);
+            Document document = connection.get();
+
+            if (connection.response().statusCode() == 200) {
+                if (isInitialPage) {
+                    writer.write("input: <a>" + urlToCrawl + "</a>\n");
+                    writer.write("depth: " + depth + "\n");
+                    writer.write("summary:\n");
+                    FileWriter.printHeaders(document, "");
+                    visited.add(urlToCrawl);
+                } else {
+                    writer.write("<br> --> link to <a>" + urlToCrawl + "</a>\n");
+                    //TODO: Print more dashes the deeper the crawler goes (Depth: 3 gives ---)
+                    FileWriter.printHeaders(document, " --> ");
+                    writer.write("<br>\n");
+                    visited.add(urlToCrawl);
+                }
+                return document;
+            }
+        } catch (IOException e) {
+            writer.write("<br>--> broken link <a>" + urlToCrawl + "</a>\n");
         }
+        return null;
     }
 
-    public void checkURLExceptions(String URL) {
-        if (URL == null) {
-            throw new IllegalArgumentException("URL may not be null.");
+    static boolean isDomainAllowed(String url) {
+        try {
+            URI uri = new URI(url);
+            String domain = uri.getHost();
+            for (String allowedDomain : WebCrawler.allowedDomains) {
+                if (domain != null && domain.contains(allowedDomain)) {
+                    return true;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
-        if(URL.isEmpty()){
-            throw new IllegalArgumentException("URL may not be empty.");
-        }
+        return false;
     }
 }

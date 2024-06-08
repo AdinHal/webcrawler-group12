@@ -1,4 +1,4 @@
-import org.junit.Test;
+/*import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 
 public class MarkdownGeneratorTest {
-/*
+
     static MarkdownGenerator markdownGenerator;
 
     @Test
@@ -82,5 +82,6 @@ public class MarkdownGeneratorTest {
 
         assertTrue("PW Indicate error",testPrintWriter.checkError());
     }
-*/
+
 }
+*/

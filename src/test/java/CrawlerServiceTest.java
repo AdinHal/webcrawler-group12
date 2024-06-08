@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import crawler.*;
@@ -74,5 +74,6 @@ public class CrawlerServiceTest {
     @AfterClass
     public static void testCleanUp() {
 
-    }*/
+    }
 }
+*/
