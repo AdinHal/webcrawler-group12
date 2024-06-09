@@ -18,7 +18,7 @@ public class Main {
 
             System.out.print("Enter the crawling depth: ");
             int crawlDepth = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline character
+            scanner.nextLine();
 
             System.out.print("Enter allowed domains (comma separated): ");
             String domainsInput = scanner.nextLine();
