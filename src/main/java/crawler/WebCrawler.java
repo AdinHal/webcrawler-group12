@@ -40,8 +40,8 @@ public class WebCrawler implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Starting crawl for URL: " + urlToCrawl);
+        //System.out.println("Starting crawl for URL: " + urlToCrawl);
         crawl(urlToCrawl, 0, maxDepth, visited, isInitialPage);
-        System.out.println("Finished crawl for URL: " + urlToCrawl);
+        //System.out.println("Finished crawl for URL: " + urlToCrawl);
     }
 }

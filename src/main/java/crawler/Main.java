@@ -1,5 +1,6 @@
 package crawler;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,11 +39,14 @@ public class Main {
             }
 
             executorService.shutdown();
-            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
-            FileWriterSingleton.getInstance().close();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try{
+                executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+            System.out.printf("Crawling complete\n");
         } finally {
             FileWriterSingleton.getInstance().close();
             System.out.println("File written successfully.\n");
