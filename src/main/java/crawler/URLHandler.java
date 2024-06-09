@@ -51,7 +51,7 @@ public class URLHandler {
         try {
             URI uri = new URI(url);
             String domain = uri.getHost();
-            for (String allowedDomain : WebCrawler.allowedDomains) {
+            for (String allowedDomain : Main.allowedDomains) {
                 if (domain != null && domain.contains(allowedDomain)) {
                     return true;
                 }
