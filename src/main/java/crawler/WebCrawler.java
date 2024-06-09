@@ -3,7 +3,6 @@ package crawler;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.util.HashSet;
 import java.util.List;
 
 import static crawler.URLHandler.requestLinkAccess;
@@ -26,9 +25,9 @@ public class WebCrawler implements Runnable {
 
     private static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
         if (currentDepth <= maxDepth) {
-            System.out.println(Thread.currentThread().getName() + " is crawling URL: " + urlToCrawl + " at depth: " + currentDepth);
-            Document document = requestLinkAccess(urlToCrawl, currentDepth, visited, isInitialPage);
+            Document document = requestLinkAccess(urlToCrawl, currentDepth, maxDepth, visited, isInitialPage);
             if (document != null) {
+                visited.add(urlToCrawl);
                 for (Element link : document.select("a[href]")) {
                     String hrefValue = link.absUrl("href");
                     if (!visited.contains(hrefValue) && currentDepth < MAX_ADDITIONAL_DEPTH && URLHandler.isDomainAllowed(hrefValue)) {

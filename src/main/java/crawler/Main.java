@@ -1,9 +1,11 @@
 package crawler;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-
     static Set<String> allowedDomains = new HashSet<>();
 
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class Main {
 
             System.out.print("Enter the crawling depth: ");
             int crawlDepth = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine();  // Consume the newline character
 
             System.out.print("Enter allowed domains (comma separated): ");
             String domainsInput = scanner.nextLine();
@@ -27,25 +29,20 @@ public class Main {
 
             System.out.println("\nTraversing site and writing file...\n");
 
-            List<Thread> threads = new ArrayList<>();
+            ExecutorService executorService = Executors.newFixedThreadPool(urls.length);
+
             for (String url : urls) {
                 List<String> visited = new ArrayList<>();
                 WebCrawler webCrawler = new WebCrawler(url.trim(), crawlDepth, visited, true);
-                Thread thread = new Thread(webCrawler);
-                threads.add(thread);
-                thread.start();
+                executorService.submit(webCrawler);
             }
 
-
-            for (Thread thread : threads) {
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            executorService.shutdown();
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
             FileWriterSingleton.getInstance().close();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } finally {
             FileWriterSingleton.getInstance().close();
             System.out.println("File written successfully.\n");
