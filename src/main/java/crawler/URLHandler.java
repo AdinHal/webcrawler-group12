@@ -1,15 +1,14 @@
 package crawler;
 
-import org.jsoup.Jsoup;
 import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.net.URI;
-import java.util.List;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.List;
 
 public class URLHandler {
 
@@ -43,6 +42,9 @@ public class URLHandler {
             }
         } catch (IOException e) {
             writer.write("<br>--> broken link <a>" + urlToCrawl + "</a>\n");
+        } catch (IllegalArgumentException IAE) {
+            System.out.print("One or more URLs are malformed or null. Terminating program.");
+            System.exit(1);
         }
         return null;
     }
@@ -51,13 +53,13 @@ public class URLHandler {
         try {
             URI uri = new URI(url);
             String domain = uri.getHost();
-            for (String allowedDomain : WebCrawler.allowedDomains) {
+            for (String allowedDomain : Main.allowedDomains) {
                 if (domain != null && domain.contains(allowedDomain)) {
                     return true;
                 }
             }
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            System.out.print("One or more invalid URLs have been specified.");
         }
         return false;
     }
