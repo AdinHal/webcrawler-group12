@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static crawler.URLHandler.requestLinkAccess;
 
 public class WebCrawler implements Runnable {
+
     private final int maxDepth;
     private final String urlToCrawl;
     private final List<String> visited;
