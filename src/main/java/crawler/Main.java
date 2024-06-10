@@ -1,52 +1,29 @@
 package crawler;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
     static Set<String> allowedDomains = new HashSet<>();
+    public static int crawlDepth = 0;
+    public static String urlsToCrawl;
 
     public static void main(String[] args) {
         try {
-            Scanner scanner = new Scanner(System.in);
+            InputValidator IV = new InputValidator();
 
             System.out.print("Enter the URLs to be crawled (comma separated): ");
-            String urlsInput = scanner.nextLine();
+            String urlsInput = IV.inputURLs();
+
             String[] urls = urlsInput.split(",");
 
             System.out.print("Enter the crawling depth: ");
-            int crawlDepth = scanner.nextInt();
-            scanner.nextLine();
+            IV.inputDepth();
 
-            System.out.print("Enter allowed domains (comma separated): ");
-            String domainsInput = scanner.nextLine();
-            String[] domains = domainsInput.split(",");
-            for (String domain : domains) {
-                allowedDomains.add(domain.trim());
-            }
+            System.out.print("Enter allowed domains (comma separated, press Enter to skip): ");
+            IV.inputDomains();
 
             System.out.println("\nTraversing site and writing file...\n");
-
-            ExecutorService executorService = Executors.newFixedThreadPool(urls.length);
-
-            for (String url : urls) {
-                List<String> visited = new ArrayList<>();
-                WebCrawler webCrawler = new WebCrawler(url.trim(), crawlDepth, visited, true);
-                executorService.submit(webCrawler);
-            }
-
-            executorService.shutdown();
-
-            try{
-                executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-
-            System.out.printf("Crawling complete\n");
+            WebCrawler.startExecutorService(urls, crawlDepth);
         } finally {
             FileWriterSingleton.getInstance().close();
             System.out.println("File written successfully.\n");
