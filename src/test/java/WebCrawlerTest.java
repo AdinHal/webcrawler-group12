@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -62,7 +63,7 @@ class WebCrawlerTest {
         mockStatic(URLHandler.class);
         when(URLHandler.requestLinkAccess(anyString(),anyInt(),anyInt(),anyList(),anyBoolean())).thenReturn(mockDocument);
 
-        webCrawler.crawl(urlToCrawl,4,3,visitedLinks,true);
+        WebCrawler.crawl(urlToCrawl,4,3,visitedLinks,true);
 
         assertFalse(visitedLinks.contains(urlToCrawl));
     }
@@ -75,9 +76,18 @@ class WebCrawlerTest {
         mockStatic(Executors.class);
         when(Executors.newFixedThreadPool(anyInt())).thenReturn(mockExecutorService);
 
-        webCrawler.startExecutorService(urls,3);
+        WebCrawler.startExecutorService(urls,3);
 
         verify(mockExecutorService,times(urls.length)).submit(any(Runnable.class));
     }
 
+    @Test
+    public void testStopExecutorService() throws InterruptedException {
+        ExecutorService mockExecutorService = mock(ExecutorService.class);
+        when(mockExecutorService.awaitTermination(anyLong(),any(TimeUnit.class))).thenReturn(true);
+
+        WebCrawler.endExecutorService(mockExecutorService);
+
+        verify(mockExecutorService,times(1)).shutdown();
+    }
 }
