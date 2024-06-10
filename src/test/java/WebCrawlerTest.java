@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -63,6 +65,19 @@ class WebCrawlerTest {
         webCrawler.crawl(urlToCrawl,4,3,visitedLinks,true);
 
         assertFalse(visitedLinks.contains(urlToCrawl));
+    }
+
+    @Test
+    public void testStartExecutorService(){
+        String[] urls = {"https://books.toscrape.com/", "https://quotes.toscrape.com/"};
+
+        ExecutorService mockExecutorService = mock(ExecutorService.class);
+        mockStatic(Executors.class);
+        when(Executors.newFixedThreadPool(anyInt())).thenReturn(mockExecutorService);
+
+        webCrawler.startExecutorService(urls,3);
+
+        verify(mockExecutorService,times(urls.length)).submit(any(Runnable.class));
     }
 
 }
