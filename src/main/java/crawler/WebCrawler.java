@@ -26,7 +26,7 @@ public class WebCrawler implements Runnable {
         this.isInitialPage = isInitialPage;
     }
 
-    private static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
+    public static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
         if (currentDepth <= maxDepth) {
             Document document = requestLinkAccess(urlToCrawl, currentDepth, maxDepth, visited, isInitialPage);
             if (document != null) {
@@ -65,7 +65,6 @@ public class WebCrawler implements Runnable {
             boolean isClosedSuccessfully = executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
             if(!isClosedSuccessfully){
                 System.out.print("ERROR: Unable to terminate open Threads.");
-                executorService.close();
             }
         } catch (InterruptedException e){
             System.out.print("ERROR: One or more Threads were interrupted. Some crawls may be incomplete or missing entirely.");
