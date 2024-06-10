@@ -15,7 +15,7 @@ public class FileWriterSingletonTest {
     private BufferedWriter mockBufferedWriter;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         fileWriterSingleton = FileWriterSingleton.getInstance();
         mockBufferedWriter = Mockito.mock(BufferedWriter.class);
 
@@ -29,7 +29,7 @@ public class FileWriterSingletonTest {
     }
 
     @AfterEach
-    void tearDown() throws IOException {
+    void tearDown() {
         try {
             var field = FileWriterSingleton.class.getDeclaredField("instance");
             field.setAccessible(true);

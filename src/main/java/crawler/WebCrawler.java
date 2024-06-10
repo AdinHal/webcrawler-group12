@@ -65,7 +65,6 @@ public class WebCrawler implements Runnable {
             boolean isClosedSuccessfully = executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
             if(!isClosedSuccessfully){
                 System.out.print("ERROR: Unable to terminate open Threads.");
-                executorService.close();
             }
         } catch (InterruptedException e){
             System.out.print("ERROR: One or more Threads were interrupted. Some crawls may be incomplete or missing entirely.");

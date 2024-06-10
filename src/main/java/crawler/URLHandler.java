@@ -44,7 +44,7 @@ public class URLHandler {
             writer.write("<br>--> broken link <a>" + urlToCrawl + "</a>\n");
         } catch (IllegalArgumentException IAE) {
             System.out.print("One or more URLs are malformed or null. Terminating program.");
-            System.exit(1);
+            throw new IllegalArgumentException("One or more URLs are malformed or null.");
         }
         return null;
     }
