@@ -1,11 +1,14 @@
 import crawler.URLHandler;
 import crawler.WebCrawler;
 
+
 import org.mockito.Mockito;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Document;
+import org.mockito.MockedStatic;
 import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
@@ -23,15 +26,22 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 
 class WebCrawlerTest {
 
+    private String urlToCrawl;
     private WebCrawler webCrawler;
     private List<String> visitedLinks;
-    private String urlToCrawl;
+    private MockedStatic<URLHandler> mockedUrlHandler;
 
     @BeforeEach
     public void setUp() {
         urlToCrawl = "http://books.toscrape.com";
         visitedLinks = new ArrayList<>();
         webCrawler = new WebCrawler(urlToCrawl, 3, visitedLinks, true);
+        mockedUrlHandler = Mockito.mockStatic(URLHandler.class);
+    }
+
+    @AfterEach
+    void tearDown() {
+        mockedUrlHandler.close();
     }
 
     @Test
@@ -47,10 +57,8 @@ class WebCrawlerTest {
         when(mockDocument.select("a[href]")).thenReturn(mockElements);
         when(mockElement.absUrl("href")).thenReturn("https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html");
 
-        mockStatic(URLHandler.class);
-
-        when(URLHandler.requestLinkAccess(anyString(),anyInt(),anyInt(),anyList(),anyBoolean())).thenReturn(mockDocument);
-        when(URLHandler.isDomainAllowed(anyString())).thenReturn(true);
+        mockedUrlHandler.when(() -> URLHandler.requestLinkAccess(anyString(), anyInt(), anyInt(), anyList(), anyBoolean())).thenReturn(mockDocument);
+        mockedUrlHandler.when(() -> URLHandler.isDomainAllowed(anyString())).thenReturn(true);
 
         webCrawlerSpy.run();
 
@@ -61,8 +69,7 @@ class WebCrawlerTest {
     public void testCrawlExceedsMaxDepth(){
         Document mockDocument = mock(Document.class);
 
-        mockStatic(URLHandler.class);
-        when(URLHandler.requestLinkAccess(anyString(),anyInt(),anyInt(),anyList(),anyBoolean())).thenReturn(mockDocument);
+        mockedUrlHandler.when(() -> URLHandler.requestLinkAccess(anyString(), anyInt(), anyInt(), anyList(), anyBoolean())).thenReturn(mockDocument);
 
         WebCrawler.crawl(urlToCrawl,4,3,visitedLinks,true);
 
