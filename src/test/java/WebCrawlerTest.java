@@ -90,7 +90,7 @@ class WebCrawlerTest {
     }
 
     @Test
-    public void testStopExecutorService() throws InterruptedException {
+    public void testEndExecutorService() throws InterruptedException {
         ExecutorService mockExecutorService = mock(ExecutorService.class);
         when(mockExecutorService.awaitTermination(anyLong(),any(TimeUnit.class))).thenReturn(true);
 
