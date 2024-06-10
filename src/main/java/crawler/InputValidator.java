@@ -3,17 +3,21 @@ package crawler;
 import java.util.Scanner;
 
 public class InputValidator {
-    public static void inputURLs(Scanner scanner){
-        String URLRegEx = "\\b((https?|ftp)://[^\\s,]+(?:/[^\\s,]*)?)\\b(?:,\\s*\\b((https?|ftp)://[^\\s,]+(?:/[^\\s,]*)?)\\b)*\n";
+    public final Scanner scanner = new Scanner(System.in);
+
+    public String inputURLs(){
+        String URLRegEx = "\\b((https?|ftp):\\/\\/[^\\s,]+(?:\\/[^\\s,]*)?)\\b(?:,\\s*\\b((https?|ftp):\\/\\/[^\\s,]+(?:\\/[^\\s,]*)?)\\b)*";
 
         Main.urlsToCrawl = scanner.nextLine();
 
         while(!Main.urlsToCrawl.matches(URLRegEx)) {
             System.out.print("One or more URLs are malformed. Please re-enter your URL(s): ");
-            scanner.next();
+            Main.urlsToCrawl = scanner.next();
         }
+        return Main.urlsToCrawl;
     }
-    public static void inputDepth(Scanner scanner){
+
+    public void inputDepth(){
         do {
             while(!scanner.hasNextInt()) {
                 System.out.print("Invalid input. Please enter a positive integer: ");
@@ -21,5 +25,13 @@ public class InputValidator {
             }
             Main.crawlDepth = scanner.nextInt();
         } while (Main.crawlDepth <= 0);
+    }
+
+    public void inputDomains(){
+        String domainsInput = scanner.nextLine();
+        String[] domains = domainsInput.split(",");
+        for (String domain : domains) {
+            Main.allowedDomains.add(domain.trim());
+        }
     }
 }
