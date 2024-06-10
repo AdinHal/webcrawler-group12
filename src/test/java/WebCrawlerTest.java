@@ -53,4 +53,16 @@ class WebCrawlerTest {
         assertTrue(visitedLinks.contains(urlToCrawl));
     }
 
+    @Test
+    public void testCrawlExceedsMaxDepth(){
+        Document mockDocument = mock(Document.class);
+
+        mockStatic(URLHandler.class);
+        when(URLHandler.requestLinkAccess(anyString(),anyInt(),anyInt(),anyList(),anyBoolean())).thenReturn(mockDocument);
+
+        webCrawler.crawl(urlToCrawl,4,3,visitedLinks,true);
+
+        assertFalse(visitedLinks.contains(urlToCrawl));
+    }
+
 }
