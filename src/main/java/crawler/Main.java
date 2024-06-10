@@ -13,6 +13,7 @@ public class Main {
 
             System.out.print("Enter the URLs to be crawled (comma separated): ");
             String urlsInput = IV.inputURLs();
+
             String[] urls = urlsInput.split(",");
 
             System.out.print("Enter the crawling depth: ");
@@ -22,8 +23,7 @@ public class Main {
             IV.inputDomains();
 
             System.out.println("\nTraversing site and writing file...\n");
-            WebCrawler.SomethingCrawl(urls, crawlDepth);
-
+            WebCrawler.startExecutorService(urls, crawlDepth);
         } finally {
             FileWriterSingleton.getInstance().close();
             System.out.println("File written successfully.\n");
