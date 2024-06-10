@@ -40,7 +40,7 @@ public class FileWriterSingletonTest {
     }
 
     @Test
-    void testSingletonInstance() {
+    void testInstanceCreation() {
         FileWriterSingleton instance1 = FileWriterSingleton.getInstance();
         FileWriterSingleton instance2 = FileWriterSingleton.getInstance();
         assertSame(instance1, instance2, "Both instances should be the same");
@@ -59,12 +59,73 @@ public class FileWriterSingletonTest {
     }
 
     @Test
-    void testClose() {
+    void testCloseWriter() {
         fileWriterSingleton.close();
         try {
             verify(mockBufferedWriter, times(1)).close();
         } catch (IOException e) {
             fail("IOException should not occur", e);
+        }
+    }
+
+    @Test
+    void testWriteInMultipleThreads() throws InterruptedException {
+        Runnable writeTask = () -> fileWriterSingleton.write("Test content\n");
+
+        Thread thread1 = new Thread(writeTask);
+        Thread thread2 = new Thread(writeTask);
+        Thread thread3 = new Thread(writeTask);
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+
+        thread1.join();
+        thread2.join();
+        thread3.join();
+
+        try {
+            verify(mockBufferedWriter, times(3)).write("Thread content\n");
+            verify(mockBufferedWriter, times(3)).flush();
+        } catch (IOException e) {
+            fail("IOException should not occur", e);
+        }
+    }
+
+    @Test
+    void testWriteExceptionHandling() {
+        String testContent = "Test content\n";
+        try {
+            doThrow(new IOException("Mock IOException")).when(mockBufferedWriter).write(testContent);
+        } catch (IOException e) {
+            fail("Setup for IOException mocking failed", e);
+        }
+
+        // This will only print the stack trace
+        fileWriterSingleton.write(testContent);
+
+        try {
+            verify(mockBufferedWriter, times(1)).write(testContent);
+            verify(mockBufferedWriter, times(0)).flush();
+        } catch (IOException e) {
+            fail("IOException should not occur during verification", e);
+        }
+    }
+
+    @Test
+    void testCloseExceptionHandling() {
+        try {
+            doThrow(new IOException("Mock IOException")).when(mockBufferedWriter).close();
+        } catch (IOException e) {
+            fail("Setup for IOException mocking failed", e);
+        }
+
+        fileWriterSingleton.close();
+
+        try {
+            verify(mockBufferedWriter, times(1)).close();
+        } catch (IOException e) {
+            fail("IOException should not occur during verification", e);
         }
     }
 }

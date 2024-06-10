@@ -16,7 +16,7 @@ public class URLHandler {
         return document.select(tag);
     }
 
-    public static Document requestLinkAccess(String urlToCrawl, int depth, List<String> visited, boolean isInitialPage) {
+    public static Document requestLinkAccess(String urlToCrawl, int depth, int maxDepth, List<String> visited, boolean isInitialPage) {
         FileWriterSingleton writer = FileWriterSingleton.getInstance();
         try {
             Connection connection = Jsoup.connect(urlToCrawl);
@@ -27,7 +27,7 @@ public class URLHandler {
             if (connection.response().statusCode() == 200) {
                 if (isInitialPage) {
                     writer.write("input: <a>" + urlToCrawl + "</a>\n");
-                    writer.write("depth: " + depth + "\n");
+                    writer.write("depth: " + maxDepth + "\n");
                     writer.write("summary:\n");
                     FileWriterSingleton.printHeaders(document, " ");
                     visited.add(urlToCrawl);

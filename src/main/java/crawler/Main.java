@@ -1,34 +1,55 @@
 package crawler;
 
-import java.util.HashSet;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static HashSet<String> allowedDomains = new HashSet<>();
-    public static int crawlDepth;
-    public static String urlsToCrawl;
+    static Set<String> allowedDomains = new HashSet<>();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        try {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the URLs to be crawled (comma separated): ");
+            System.out.print("Enter the URLs to be crawled (comma separated): ");
+            String urlsInput = scanner.nextLine();
+            String[] urls = urlsInput.split(",");
 
-        InputValidator.inputURLs(scanner);
-        String[] urls = urlsToCrawl.split(",\\s*");
+            System.out.print("Enter the crawling depth: ");
+            int crawlDepth = scanner.nextInt();
+            scanner.nextLine();
 
-        System.out.print("Enter desired crawl depth: ");
+            System.out.print("Enter allowed domains (comma separated): ");
+            String domainsInput = scanner.nextLine();
+            String[] domains = domainsInput.split(",");
+            for (String domain : domains) {
+                allowedDomains.add(domain.trim());
+            }
 
-        InputValidator.inputDepth(scanner);
+            System.out.println("\nTraversing site and writing file...\n");
 
-        System.out.print("Enter allowed domains (comma separated): ");
-        String domainsInput = scanner.nextLine();
-        String[] domains = domainsInput.split(",");
-        for (String domain : domains) {
-            allowedDomains.add(domain.trim());
+            ExecutorService executorService = Executors.newFixedThreadPool(urls.length);
+
+            for (String url : urls) {
+                List<String> visited = new ArrayList<>();
+                WebCrawler webCrawler = new WebCrawler(url.trim(), crawlDepth, visited, true);
+                executorService.submit(webCrawler);
+            }
+
+            executorService.shutdown();
+
+            try{
+                executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+            System.out.printf("Crawling complete\n");
+        } finally {
+            FileWriterSingleton.getInstance().close();
+            System.out.println("File written successfully.\n");
         }
-
-        System.out.println("\nTraversing site and writing file...\n");
-
-        WebCrawler.startCrawling(urls, crawlDepth);
     }
 }
