@@ -34,10 +34,6 @@ summary:
 # - > Quotes to Scrape
 ### - > Albert Einstein
 <br>
-<br> --> link to <a>http://quotes.toscrape.com/</a>
-# -- > Quotes to Scrape
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/index.html</a>
 # - > All products
 ### - > A Light in the ...
@@ -61,8 +57,9 @@ summary:
 ### - > Libertarianism for Beginners
 ### - > It's Only the Himalayas
 <br>
-<br> --> link to <a>http://quotes.toscrape.com/login</a>
+<br> --> link to <a>http://quotes.toscrape.com/</a>
 # -- > Quotes to Scrape
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books_1/index.html</a>
 # -- > Books
@@ -86,6 +83,9 @@ summary:
 ### -- > Mesaerion: The Best Science ...
 ### -- > Libertarianism for Beginners
 ### -- > It's Only the Himalayas
+<br>
+<br> --> link to <a>http://quotes.toscrape.com/login</a>
+# -- > Quotes to Scrape
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/travel_2/index.html</a>
 # -- > Travel
@@ -124,11 +124,6 @@ summary:
 ### -- > The Bachelor Girl's Guide ...
 ### -- > Delivering the Truth (Quaker ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/change/page/1/</a>
-# - > Quotes to Scrape
-### - > Viewing tag: change
-## - > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html</a>
 # -- > Historical Fiction
 ### -- > Tipping the Velvet
@@ -152,10 +147,10 @@ summary:
 ### -- > The Guernsey Literary and ...
 ### -- > Girl in the Blue ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/deep-thoughts/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: deep-thoughts
-## -- > Top Ten tags
+<br> --> link to <a>https://quotes.toscrape.com/tag/change/page/1/</a>
+# - > Quotes to Scrape
+### - > Viewing tag: change
+## - > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/sequential-art_5/index.html</a>
 # -- > Sequential Art
@@ -180,9 +175,9 @@ summary:
 ### -- > Codename Baboushka, Volume 1: ...
 ### -- > Camp Midnight
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/thinking/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/deep-thoughts/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: thinking
+### -- > Viewing tag: deep-thoughts
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/classics_6/index.html</a>
@@ -207,9 +202,9 @@ summary:
 ### -- > Emma
 ### -- > Alice in Wonderland (Alice's ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/world/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/thinking/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: world
+### -- > Viewing tag: thinking
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/philosophy_7/index.html</a>
@@ -225,6 +220,11 @@ summary:
 ### -- > The Nicomachean Ethics
 ### -- > Meditations
 ### -- > Beyond Good and Evil
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/world/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: world
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/romance_8/index.html</a>
 # -- > Romance
@@ -249,11 +249,6 @@ summary:
 ### -- > Dark Lover (Black Dagger ...
 ### -- > Changing the Game (Play ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/love/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: love
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/womens-fiction_9/index.html</a>
 # -- > Womens Fiction
 ### -- > I Had a Nice ...
@@ -274,9 +269,9 @@ summary:
 ### -- > The Edge of Reason ...
 ### -- > Bridget Jones's Diary (Bridget ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/inspirational/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/love/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: inspirational
+### -- > Viewing tag: love
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/fiction_10/index.html</a>
@@ -302,9 +297,9 @@ summary:
 ### -- > I Am Pilgrim (Pilgrim ...
 ### -- > Eligible (The Austen Project ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/life/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/inspirational/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: life
+### -- > Viewing tag: inspirational
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/childrens_11/index.html</a>
@@ -330,9 +325,9 @@ summary:
 ### -- > The Lonely Ones
 ### -- > The Day the Crayons ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/humor/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/life/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: humor
+### -- > Viewing tag: life
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/religion_12/index.html</a>
@@ -345,9 +340,9 @@ summary:
 ### -- > The Bhagavad Gita
 ### -- > Choosing Our Religion: The ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/books/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/humor/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: books
+### -- > Viewing tag: humor
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/nonfiction_13/index.html</a>
@@ -373,9 +368,9 @@ summary:
 ### -- > The Artist's Way: A ...
 ### -- > So You've Been Publicly ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/reading/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/books/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: reading
+### -- > Viewing tag: books
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/music_14/index.html</a>
@@ -394,9 +389,9 @@ summary:
 ### -- > Old Records Never Die: ...
 ### -- > Forever Rockers (The Rocker ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/friendship/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/reading/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: friendship
+### -- > Viewing tag: reading
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/default_15/index.html</a>
@@ -422,9 +417,9 @@ summary:
 ### -- > The Emerald Mystery
 ### -- > The Bridge to Consciousness: ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/friends/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/friendship/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: friends
+### -- > Viewing tag: friendship
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/science-fiction_16/index.html</a>
@@ -446,9 +441,9 @@ summary:
 ### -- > The Last Girl (The ...
 ### -- > Having the Barbarian's Baby ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/truth/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/friends/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: truth
+### -- > Viewing tag: friends
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/sports-and-games_17/index.html</a>
@@ -459,9 +454,9 @@ summary:
 ### -- > Settling the Score (The ...
 ### -- > Icing (Aces Hockey #2)
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/simile/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/truth/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: simile
+### -- > Viewing tag: truth
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/add-a-comment_18/index.html</a>
@@ -487,6 +482,11 @@ summary:
 ### -- > Rook
 ### -- > The Midnight Watch: A ...
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/simile/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: simile
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/fantasy_19/index.html</a>
 # -- > Fantasy
 ### -- > Unicorn Tracks
@@ -509,10 +509,6 @@ summary:
 ### -- > The Star-Touched Queen
 ### -- > A Shard of Ice ...
 ### -- > King's Folly (The Kinsman ...
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/author/J-K-Rowling</a>
-# - > Quotes to Scrape
-### - > J.K. Rowling
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/new-adult_20/index.html</a>
 # -- > New Adult
@@ -563,11 +559,6 @@ summary:
 ### -- > Seven Brief Lessons on ...
 ### -- > The Selfish Gene
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/abilities/page/1/</a>
-# - > Quotes to Scrape
-### - > Viewing tag: abilities
-## - > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/poetry_23/index.html</a>
 # -- > Poetry
 ### -- > A Light in the ...
@@ -590,14 +581,13 @@ summary:
 ### -- > Booked
 ### -- > Twenty Love Poems and ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/choices/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: choices
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/paranormal_24/index.html</a>
 # -- > Paranormal
 ### -- > Vampire Knight, Vol. 1 ...
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/author/J-K-Rowling</a>
+# - > Quotes to Scrape
+### - > J.K. Rowling
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/art_25/index.html</a>
 # -- > Art
@@ -610,11 +600,6 @@ summary:
 ### -- > The Art Book
 ### -- > Ways of Seeing
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/inspirational/page/1/</a>
-# - > Quotes to Scrape
-### - > Viewing tag: inspirational
-## - > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/psychology_26/index.html</a>
 # -- > Psychology
 ### -- > The Lucifer Effect: Understanding ...
@@ -625,10 +610,10 @@ summary:
 ### -- > Civilization and Its Discontents
 ### -- > 8 Keys to Mental ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/life/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: life
-## -- > Top Ten tags
+<br> --> link to <a>https://quotes.toscrape.com/tag/abilities/page/1/</a>
+# - > Quotes to Scrape
+### - > Viewing tag: abilities
+## - > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/autobiography_27/index.html</a>
 # -- > Autobiography
@@ -642,28 +627,23 @@ summary:
 ### -- > Life Without a Recipe
 ### -- > A Heartbreaking Work of ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/live/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/choices/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: live
+### -- > Viewing tag: choices
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/parenting_28/index.html</a>
 # -- > Parenting
 ### -- > Catastrophic Happiness: Finding Joy ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/miracle/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: miracle
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/adult-fiction_29/index.html</a>
 # -- > Adult Fiction
 ### -- > Fifty Shades Freed (Fifty ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/miracles/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: miracles
-## -- > Top Ten tags
+<br> --> link to <a>https://quotes.toscrape.com/tag/inspirational/page/1/</a>
+# - > Quotes to Scrape
+### - > Viewing tag: inspirational
+## - > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/humor_30/index.html</a>
 # -- > Humor
@@ -677,6 +657,11 @@ summary:
 ### -- > Naked
 ### -- > Lamb: The Gospel According ...
 ### -- > Holidays on Ice
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/life/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: life
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/horror_31/index.html</a>
 # -- > Horror
@@ -698,9 +683,10 @@ summary:
 ### -- > The Girl with All ...
 ### -- > House of Leaves
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/author/Marilyn-Monroe</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/live/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Marilyn Monroe
+### -- > Viewing tag: live
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/history_32/index.html</a>
 # -- > History
@@ -722,6 +708,16 @@ summary:
 ### -- > America's War for the ...
 ### -- > The Guns of August
 ### -- > House of Lost Worlds: ...
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/miracle/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: miracle
+## -- > Top Ten tags
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/miracles/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: miracles
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/food-and-drink_33/index.html</a>
 # -- > Food and Drink
@@ -745,11 +741,6 @@ summary:
 ### -- > The Moosewood Cookbook: Recipes ...
 ### -- > 32 Yolks
 ### -- > Naturally Lean: 125 Nourishing ...
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/be-yourself/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: be-yourself
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/christian-fiction_34/index.html</a>
 # -- > Christian Fiction
@@ -775,9 +766,9 @@ summary:
 ### -- > The Lean Startup: How ...
 ### -- > Rework
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/author/Thomas-A-Edison</a>
+<br> --> link to <a>https://quotes.toscrape.com/author/Marilyn-Monroe</a>
 # -- > Quotes to Scrape
-### -- > Thomas A. Edison
+### -- > Marilyn Monroe
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/biography_36/index.html</a>
 # -- > Biography
@@ -786,6 +777,11 @@ summary:
 ### -- > The Faith of Christopher ...
 ### -- > Benjamin Franklin: An American ...
 ### -- > The Rise of Theodore ...
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/be-yourself/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: be-yourself
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/thriller_37/index.html</a>
 # -- > Thriller
@@ -807,10 +803,9 @@ summary:
 ### -- > Someone Like You (The ...
 ### -- > We Are All Completely ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/edison/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/author/Thomas-A-Edison</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: edison
-## -- > Top Ten tags
+### -- > Thomas A. Edison
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/spirituality_39/index.html</a>
 # -- > Spirituality
@@ -821,19 +816,9 @@ summary:
 ### -- > Unreasonable Hope: Finding Faith ...
 ### -- > A New Earth: Awakening ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/failure/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: failure
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/academic_40/index.html</a>
 # -- > Academic
 ### -- > Logan Kade (Fallen Crest ...
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/paraphrased/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: paraphrased
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/self-help_41/index.html</a>
 # -- > Self Help
@@ -843,19 +828,14 @@ summary:
 ### -- > You Are a Badass: ...
 ### -- > How to Stop Worrying ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/friends/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: friends
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/historical_42/index.html</a>
 # -- > Historical
 ### -- > All the Light We ...
 ### -- > The Girl You Left ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/heartbreak/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/edison/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: heartbreak
+### -- > Viewing tag: edison
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/christian_43/index.html</a>
@@ -864,31 +844,37 @@ summary:
 ### -- > Crazy Love: Overwhelmed by ...
 ### -- > Blue Like Jazz: Nonreligious ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/love/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/failure/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: love
+### -- > Viewing tag: failure
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/suspense_44/index.html</a>
 # -- > Suspense
 ### -- > Silence in the Dark ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/sisters/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/paraphrased/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: sisters
+### -- > Viewing tag: paraphrased
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/short-stories_45/index.html</a>
 # -- > Short Stories
 ### -- > The Grownup
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/friends/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: friends
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/novels_46/index.html</a>
 # -- > Novels
 ### -- > Suzie Snowflake: One beautiful ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/author/Elie-Wiesel</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/heartbreak/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Elie Wiesel
+### -- > Viewing tag: heartbreak
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/health_47/index.html</a>
 # -- > Health
@@ -897,48 +883,38 @@ summary:
 ### -- > 10-Day Green Smoothie Cleanse: ...
 ### -- > The Art and Science ...
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/love/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: love
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/politics_48/index.html</a>
 # -- > Politics
 ### -- > Libertarianism for Beginners
 ### -- > Why the Right Went ...
 ### -- > Equal Is Unfair: America's ...
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/sisters/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: sisters
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/cultural_49/index.html</a>
 # -- > Cultural
 ### -- > Amid the Chaos
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/activism/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: activism
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/erotica_50/index.html</a>
 # -- > Erotica
 ### -- > Dark Notes
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/apathy/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: apathy
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/category/books/crime_51/index.html</a>
 # -- > Crime
 ### -- > The Long Shadow of ...
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/hate/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: hate
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html</a>
 # -- > A Light in the Attic
 ## -- > Product Description
 ## -- > Product Information
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/indifference/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: indifference
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/tipping-the-velvet_999/index.html</a>
 # -- > Tipping the Velvet
@@ -947,10 +923,9 @@ summary:
 ## -- > Products you recently viewed
 ### -- > A Light in the ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/opposite/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/author/Elie-Wiesel</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: opposite
-## -- > Top Ten tags
+### -- > Elie Wiesel
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/soumission_998/index.html</a>
 # -- > Soumission
@@ -960,9 +935,9 @@ summary:
 ### -- > Tipping the Velvet
 ### -- > A Light in the ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/philosophy/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/activism/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: philosophy
+### -- > Viewing tag: activism
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/sharp-objects_997/index.html</a>
@@ -974,9 +949,9 @@ summary:
 ### -- > Tipping the Velvet
 ### -- > A Light in the ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/death/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/apathy/page/1/</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: death
+### -- > Viewing tag: apathy
 ## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/sapiens-a-brief-history-of-humankind_996/index.html</a>
@@ -989,6 +964,11 @@ summary:
 ### -- > Tipping the Velvet
 ### -- > A Light in the ...
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/hate/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: hate
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/the-requiem-red_995/index.html</a>
 # -- > The Requiem Red
 ## -- > Product Description
@@ -1000,9 +980,10 @@ summary:
 ### -- > Tipping the Velvet
 ### -- > A Light in the ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/author/George-Eliot</a>
+<br> --> link to <a>https://quotes.toscrape.com/tag/indifference/page/1/</a>
 # -- > Quotes to Scrape
-### -- > George Eliot
+### -- > Viewing tag: indifference
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/the-dirty-little-secrets-of-getting-your-dream-job_994/index.html</a>
 # -- > The Dirty Little Secrets of Getting Your Dream Job
@@ -1016,6 +997,11 @@ summary:
 ### -- > Tipping the Velvet
 ### -- > A Light in the ...
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/opposite/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: opposite
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/the-coming-woman-a-novel-based-on-the-life-of-the-infamous-feminist-victoria-woodhull_993/index.html</a>
 # -- > The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull
 ## -- > Product Description
@@ -1027,6 +1013,11 @@ summary:
 ### -- > Sharp Objects
 ### -- > Soumission
 ### -- > Tipping the Velvet
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/philosophy/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: philosophy
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/the-boys-in-the-boat-nine-americans-and-their-epic-quest-for-gold-at-the-1936-berlin-olympics_992/index.html</a>
 # -- > The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics
@@ -1040,6 +1031,11 @@ summary:
 ### -- > Sharp Objects
 ### -- > Soumission
 <br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/death/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: death
+## -- > Top Ten tags
+<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/the-black-maria_991/index.html</a>
 # -- > The Black Maria
 ## -- > Product Description
@@ -1051,10 +1047,6 @@ summary:
 ### -- > The Requiem Red
 ### -- > Sapiens: A Brief History ...
 ### -- > Sharp Objects
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/author/C-S-Lewis</a>
-# -- > Quotes to Scrape
-### -- > C.S. Lewis
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/starving-hearts-triangular-trade-trilogy-1_990/index.html</a>
 # -- > Starving Hearts (Triangular Trade Trilogy, #1)
@@ -1079,6 +1071,10 @@ summary:
 ### -- > The Coming Woman: A ...
 ### -- > The Dirty Little Secrets ...
 ### -- > The Requiem Red
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/author/George-Eliot</a>
+# -- > Quotes to Scrape
+### -- > George Eliot
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/set-me-free_988/index.html</a>
 # -- > Set Me Free
@@ -1116,11 +1112,6 @@ summary:
 ### -- > The Black Maria
 ### -- > The Boys in the ...
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/books/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: books
-## -- > Top Ten tags
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/our-band-could-be-your-life-scenes-from-the-american-indie-underground-1981-1991_985/index.html</a>
 # -- > Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991
 ## -- > Product Description
@@ -1133,10 +1124,9 @@ summary:
 ### -- > Starving Hearts (Triangular Trade ...
 ### -- > The Black Maria
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/reading/page/1/</a>
+<br> --> link to <a>https://quotes.toscrape.com/author/C-S-Lewis</a>
 # -- > Quotes to Scrape
-### -- > Viewing tag: reading
-## -- > Top Ten tags
+### -- > C.S. Lewis
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/olio_984/index.html</a>
 # -- > Olio
@@ -1149,11 +1139,6 @@ summary:
 ### -- > Set Me Free
 ### -- > Shakespeare's Sonnets
 ### -- > Starving Hearts (Triangular Trade ...
-<br>
-<br> --> link to <a>https://quotes.toscrape.com/tag/tea/page/1/</a>
-# -- > Quotes to Scrape
-### -- > Viewing tag: tea
-## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html</a>
 # -- > Mesaerion: The Best Science Fiction Stories 1800-1849
@@ -1179,10 +1164,6 @@ summary:
 ### -- > Scott Pilgrim's Precious Little ...
 ### -- > Set Me Free
 <br>
-<br> --> link to <a>https://quotes.toscrape.com/author/Martin-Luther-King-Jr</a>
-# -- > Quotes to Scrape
-### -- > Martin Luther King Jr.
-<br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html</a>
 # -- > It's Only the Himalayas
 ## -- > Product Description
@@ -1194,6 +1175,11 @@ summary:
 ### -- > Our Band Could Be ...
 ### -- > Rip it Up and ...
 ### -- > Scott Pilgrim's Precious Little ...
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/books/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: books
+## -- > Top Ten tags
 <br>
 <br> --> link to <a>https://books.toscrape.com/catalogue/page-2.html</a>
 # -- > All products
@@ -1217,6 +1203,20 @@ summary:
 ### -- > In a Dark, Dark ...
 ### -- > Behind Closed Doors
 ### -- > You can't bury them ...
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/reading/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: reading
+## -- > Top Ten tags
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/tag/tea/page/1/</a>
+# -- > Quotes to Scrape
+### -- > Viewing tag: tea
+## -- > Top Ten tags
+<br>
+<br> --> link to <a>https://quotes.toscrape.com/author/Martin-Luther-King-Jr</a>
+# -- > Quotes to Scrape
+### -- > Martin Luther King Jr.
 <br>
 <br> --> link to <a>https://quotes.toscrape.com/tag/hope/page/1/</a>
 # -- > Quotes to Scrape

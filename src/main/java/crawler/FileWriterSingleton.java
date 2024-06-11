@@ -53,7 +53,6 @@ public class FileWriterSingleton {
 
         String summaryHeaderTags = "#";
 
-        //Prints routes depending on the number of the header
         for (Element header : headers){
             int headerRouteCount =
                     (header.is("h1")) ? 1
