@@ -2,20 +2,20 @@
 
 ## About / Usage
 
-- This Java application serves as a robust web crawler, designed to traverse websites starting from a user-provided URL and explore them up to a specified crawl depth.
+- This Java application serves as a robust web crawler, designed to traverse websites starting from one or more user-provided URLs and explore them up to a specified crawl depth.
 
 - This application accepts several command-line arguments to control its web crawling and processing behavior:
 
     - URL:
-        - Description: The starting URL from which the crawler will begin its operation.
-        - Command: Enter the URL when prompted: Please enter the URL:
-        - **Example**: https://example.com
+        - Description: The starting URLs from which the crawler will begin its operation. Up to 10 URLs can be crawled at the same time.
+        - Command: Enter the URLs when prompted: Please enter the URLs (comma-separated, no spaces)
+        - **Example**: https://example.com,https://www.example2.at
     - Crawl Depth:
         - Description: The maximum depth the crawler will traverse from the starting URL.
         - Command: Specify the depth when prompted: Please enter the Crawl depth
         - **Example**: 3
     - Domains to be Crawled:
-        - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
+        - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet. Leaving it blank will let the crawler accept any domain.
         - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
         - **Example**: example.com,sub.example.com
     - Additional links depth _(Optional)_:
