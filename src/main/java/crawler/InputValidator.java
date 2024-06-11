@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
 
+import static crawler.Main.*;
+
 public class InputValidator {
     public final Scanner scanner = new Scanner(System.in);
 
@@ -14,6 +16,11 @@ public class InputValidator {
 
         if (userInput.contains(",")) {
             urls = userInput.split(",");
+
+            if (urls.length > urlsToCrawl.length) {
+                System.out.print("Too many URLs specified. Try with less URLs: ");
+                splitURLs();
+            }
         }
         else{
             urls = new String[]{userInput};
@@ -28,7 +35,7 @@ public class InputValidator {
 
             for (String u : urls) {
                 new URL(u).toURI();
-                Main.urlsToCrawl[index] = u;
+                urlsToCrawl[index] = u;
                 index++;
             }
         } catch (MalformedURLException | URISyntaxException e) {
@@ -43,15 +50,15 @@ public class InputValidator {
                 System.out.print("Invalid input. Please enter a positive integer: ");
                 scanner.next();
             }
-            Main.crawlDepth = scanner.nextInt();
-        } while (Main.crawlDepth <= 0);
+            crawlDepth = scanner.nextInt();
+        } while (crawlDepth <= 0);
     }
 
     public void inputDomains(){
         String domainsInput = scanner.nextLine();
         String[] domains = domainsInput.split(",");
         for (String domain : domains) {
-            Main.allowedDomains.add(domain.trim());
+            allowedDomains.add(domain.trim());
         }
     }
 }
