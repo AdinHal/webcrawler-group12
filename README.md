@@ -18,20 +18,12 @@
         - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet. Leaving it blank will let the crawler accept any domain.
         - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
         - **Example**: example.com,sub.example.com
-    - Additional links depth _(Optional)_:
-        - Description: The maximum depth the crawler will traverse for the additionally found URL.
-        - Command: Specify the depth when prompted: Define the depth for additional links
-        - **Example**: 2 | **Default**: 2
-    - Path for the MD file _(Optional)_:
-        - Description: Allows the crawler to store the summary file in a specific path. If no path is defined the results are being stored in a temp directory.
-        - Command: Enter the path when prompted, Enter the path where the .md File should be stored. Will be stored under temp as per default:
-        - **Example**: C:\Users\User\AppData\Local\Temp\tempFolder3885246162413379470\
 
 ## Run / Setup
 
 Which website can You use?
 - `Test Website`: https://webscraper.io/test-sites/e-commerce/allinone
-- `Arguments` : `arg1=URL; arg2:Depth; arg3:Domains; arg4:Additional Links Depth; arg5:Path;`
+- `Arguments` : `arg1:URL; arg2:Depth; arg3:Domains;`
 
 `Through IntelliJ`
 
@@ -57,7 +49,7 @@ java -cp src/main/java crawler.Main
 ```
 3. Running with Arguments:
 ```bat
-java -cp src/main/java crawler.Main arg1 arg2 arg3 arg4
+java -cp src/main/java crawler.Main arg1 arg2 arg3
 ```
 
 Read more: [WikiHow](https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt#:~:text=At%20the%20command%20prompt%2C%20type,program%20after%20it%20is%20compiled.)
@@ -80,7 +72,7 @@ java -cp src/main/java crawler.Main
 ```
 5. Passing Arguments
 ```bat
-java -cp src/main/java crawler.Main arg1 arg2 arg3 arg4
+java -cp src/main/java crawler.Main arg1 arg2 arg3
 ```
 
 Read more : [StackOverflow Answer](https://stackoverflow.com/a/2361108/13667327)
@@ -93,6 +85,7 @@ The crawler implements  the following features:
 - record only the headings
 - represent the depth of the crawled websites with proper indentation (see example)
 - record the URLs of the crawled sites
-- highlight broken links
+- highlighting broken links
 - find the links to other websites and recursively do the analysis for those websites (it is enough if you analyze the pages at a depth of 2 without visiting further links, you might also allow the user to configure this depth via the command line)
 - store the results in a single markdown file (.md extension)
+- crawling multiple sites with multithreading
