@@ -25,7 +25,7 @@ public class URLHandler {
             document = connection.get();
 
             if (connection.response().statusCode() == 200) {
-                writeInfoToFile(urlToCrawl, depth, maxDepth, visited, isInitialPage);
+                FileWriterSingleton.writeToFile(urlToCrawl, depth, maxDepth, visited, isInitialPage, document);
                 return Optional.of(document);
             }
         } catch (IOException e) {
@@ -49,23 +49,5 @@ public class URLHandler {
             System.out.print("One or more invalid domains have been specified.");
         }
         return false;
-    }
-
-    public static void writeInfoToFile(String urlToCrawl, int depth, int maxDepth, List<String> visited, boolean isInitialPage){
-        String depthDash = "-";
-
-        if (isInitialPage) {
-            writer.write("input: <a>" + urlToCrawl + "</a>\n" +
-                    "depth: " + maxDepth + "\n" +
-                    "summary:\n");
-            FileWriterSingleton.printHeaders(document, " ");
-            visited.add(urlToCrawl);
-        } else {
-            writer.write("<br> --> link to <a>" + urlToCrawl + "</a>\n");
-
-            FileWriterSingleton.printHeaders(document, " " + depthDash.repeat(depth) + " > ");
-            writer.write("<br>\n");
-            visited.add(urlToCrawl);
-        }
     }
 }
