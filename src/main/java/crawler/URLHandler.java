@@ -49,7 +49,7 @@ public class URLHandler {
         return null;
     }
 
-    static boolean isDomainAllowed(String url) {
+    public static boolean isDomainAllowed(String url) {
         try {
             URI uri = new URI(url);
             String domain = uri.getHost();

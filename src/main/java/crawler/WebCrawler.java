@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static crawler.URLHandler.requestLinkAccess;
 
 public class WebCrawler implements Runnable {
+
     private final int maxDepth;
     private final String urlToCrawl;
     private final List<String> visited;
@@ -26,7 +27,7 @@ public class WebCrawler implements Runnable {
         this.isInitialPage = isInitialPage;
     }
 
-    private static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
+    public static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
         if (currentDepth <= maxDepth) {
             Document document = requestLinkAccess(urlToCrawl, currentDepth, maxDepth, visited, isInitialPage);
             if (document != null) {
