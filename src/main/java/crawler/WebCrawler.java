@@ -68,8 +68,7 @@ public class WebCrawler implements Runnable {
                 System.out.print("ERROR: Unable to terminate open Threads.");
             }
         } catch (InterruptedException e){
-            System.out.print("ERROR: One or more Threads were interrupted. Some crawls may be incomplete or missing entirely.");
-            System.exit(1);
+            throw new RuntimeException("ERROR: One or more Threads were interrupted. Some crawls may be incomplete or missing entirely.");
         }
 
         System.out.print("Crawling complete\n");

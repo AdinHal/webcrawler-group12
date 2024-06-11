@@ -10,13 +10,13 @@ import java.io.BufferedWriter;
 
 public class FileWriterSingleton {
     private static FileWriterSingleton instance;
-    private BufferedWriter writer;
+    private final BufferedWriter writer;
 
     private FileWriterSingleton() {
         try {
             writer = new BufferedWriter(new FileWriter("report.md"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("ERROR: Report file is unable to be created.");
         }
     }
 
@@ -32,17 +32,15 @@ public class FileWriterSingleton {
             writer.write(content);
             writer.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("ERROR: Contents could not be written to file.");
         }
     }
 
     public synchronized void close() {
         try {
-            if (writer != null) {
-                writer.close();
-            }
+            writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("ERROR: The file writer couldn't be closed.");
         }
     }
 

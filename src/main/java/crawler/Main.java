@@ -12,7 +12,9 @@ public class Main {
             InputValidator IV = new InputValidator();
 
             System.out.print("Enter the URLs to be crawled (comma separated): ");
-            String urlsInput = IV.inputURLs();
+            //THIS IS FOR TESTING!
+            String urlsInput = "http://books.toscrape.com/";
+            //String urlsInput = IV.inputURLs();
 
             String[] urls = urlsInput.split(",");
 
