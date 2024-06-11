@@ -29,7 +29,7 @@ public class URLHandler {
                 return Optional.of(document);
             }
         } catch (IOException e) {
-            writer.write("<br>--> broken link <a>" + urlToCrawl + "</a>\n");
+            writer.write("<br> --> broken link <a>" + urlToCrawl + "</a>\n");
         } catch (IllegalArgumentException IAE) {
             throw new IllegalArgumentException("One or more URLs are malformed or null.");
         }
@@ -46,7 +46,7 @@ public class URLHandler {
                 }
             }
         } catch (URISyntaxException e) {
-            System.out.print("One or more invalid URLs have been specified.");
+            System.out.print("One or more invalid domains have been specified.");
         }
         return false;
     }
