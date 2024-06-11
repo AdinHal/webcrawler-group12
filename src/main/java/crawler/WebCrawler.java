@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -29,10 +30,10 @@ public class WebCrawler implements Runnable {
 
     public static void crawl(String urlToCrawl, int currentDepth, int maxDepth, List<String> visited, boolean isInitialPage) {
         if (currentDepth <= maxDepth) {
-            Document document = requestLinkAccess(urlToCrawl, currentDepth, maxDepth, visited, isInitialPage);
-            if (document != null) {
+            Optional<Document> document = requestLinkAccess(urlToCrawl, currentDepth, maxDepth, visited, isInitialPage);
+            if (document.isPresent()) {
                 visited.add(urlToCrawl);
-                for (Element link : document.select("a[href]")) {
+                for (Element link : document.get().select("a[href]")) {
                     String hrefValue = link.absUrl("href");
                     if (!visited.contains(hrefValue) && currentDepth < MAX_ADDITIONAL_DEPTH && URLHandler.isDomainAllowed(hrefValue)) {
                         crawl(hrefValue, currentDepth + 1, maxDepth, visited, false);
