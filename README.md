@@ -2,51 +2,51 @@
 
 ## About / Usage
 
-- This Java application serves as a robust web crawler, designed to traverse websites starting from a user-provided URL and explore them up to a specified crawl depth.
+- This Java application serves as a robust web crawler, designed to traverse websites starting from one or more user-provided URLs and explore them up to a specified crawl depth.
 
 - This application accepts several command-line arguments to control its web crawling and processing behavior:
 
-  - URL:
-      - Description: The starting URL from which the crawler will begin its operation.
-      - Command: Enter the URL when prompted: Please enter the URL:
-      - **Example**: https://example.com
-  - Crawl Depth:
-      - Description: The maximum depth the crawler will traverse from the starting URL.
-      - Command: Specify the depth when prompted: Please enter the Crawl depth
-      - **Example**: 3
-  - Domains to be Crawled:
-      - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet.
-      - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
-      - **Example**: example.com,sub.example.com
-  - Additional links depth _(Optional)_:
-    - Description: The maximum depth the crawler will traverse for the additionally found URL.
-    - Command: Specify the depth when prompted: Define the depth for additional links
-    - **Example**: 2 | **Default**: 2
-  - Path for the MD file _(Optional)_:
-    - Description: Allows the crawler to store the summary file in a specific path. If no path is defined the results are being stored in a temp directory.
-    - Command: Enter the path when prompted, Enter the path where the .md File should be stored. Will be stored under temp as per default:
-    - **Example**: C:\Users\User\AppData\Local\Temp\tempFolder3885246162413379470\
+    - URL:
+        - Description: The starting URLs from which the crawler will begin its operation. Up to 10 URLs can be crawled at the same time.
+        - Command: Enter the URLs when prompted: Please enter the URLs (comma-separated, no spaces)
+        - **Example**: https://example.com,https://www.example2.at
+    - Crawl Depth:
+        - Description: The maximum depth the crawler will traverse from the starting URL.
+        - Command: Specify the depth when prompted: Please enter the Crawl depth
+        - **Example**: 3
+    - Domains to be Crawled:
+        - Description: Limits the crawler to specific domains to avoid wandering off to unwanted areas of the internet. Leaving it blank will let the crawler accept any domain.
+        - Command: Enter the domains when prompted, separated by commas: Please enter the domains to be crawled (comma-separated, no spaces):
+        - **Example**: example.com,sub.example.com
+    - Additional links depth _(Optional)_:
+        - Description: The maximum depth the crawler will traverse for the additionally found URL.
+        - Command: Specify the depth when prompted: Define the depth for additional links
+        - **Example**: 2 | **Default**: 2
+    - Path for the MD file _(Optional)_:
+        - Description: Allows the crawler to store the summary file in a specific path. If no path is defined the results are being stored in a temp directory.
+        - Command: Enter the path when prompted, Enter the path where the .md File should be stored. Will be stored under temp as per default:
+        - **Example**: C:\Users\User\AppData\Local\Temp\tempFolder3885246162413379470\
 
 ## Run / Setup
 
-Which website can You use? 
+Which website can You use?
 - `Test Website`: https://webscraper.io/test-sites/e-commerce/allinone
 - `Arguments` : `arg1=URL; arg2:Depth; arg3:Domains; arg4:Additional Links Depth; arg5:Path;`
 
 `Through IntelliJ`
 
 1. IntelliJ IDEA is an integrated development environment written in Java for developing computer software written in Java, Kotlin, Groovy, and other JVM-based languages.
-Key Features:
+   Key Features:
 
 2. When the project is created, in the Project tool window (Alt 01), locate the src | main | java | Main.java file and open it in the editor.
-In the editor, click the  gutter icon to run the application and select Run 'Main.main()'. IntelliJ IDEA runs your code. After that, the Run tool window opens at the bottom of the screen.
+   In the editor, click the  gutter icon to run the application and select Run 'Main.main()'. IntelliJ IDEA runs your code. After that, the Run tool window opens at the bottom of the screen.
 
 Read more: [IntelliJ Docs](https://www.jetbrains.com/help/idea/run-java-applications.html#run_application)
 
 `Command Prompt (Windows)`
 
 1. Compile the Java Code:
-First, you need to compile your Java code to create .class files. Assuming your current directory is the project root, and your source files are in src/main/java, you would compile your Main.java like this:
+   First, you need to compile your Java code to create .class files. Assuming your current directory is the project root, and your source files are in src/main/java, you would compile your Main.java like this:
 ```bat
 javac src/main/java/crawler/Main.java
 ```
@@ -66,7 +66,7 @@ Read more: [WikiHow](https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-
 
 1. Open the Terminal
 2. Navigate to the Project Directory
-   1. Once the Terminal is open, navigate to the directory where your Java files are located using the cd (change directory) command. For example, if your project is located in your Documents folder, you might use a command like:
+    1. Once the Terminal is open, navigate to the directory where your Java files are located using the cd (change directory) command. For example, if your project is located in your Documents folder, you might use a command like:
 ```bat
 cd ~/Documents/WebCrawler
 ```

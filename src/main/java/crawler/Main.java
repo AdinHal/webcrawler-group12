@@ -1,38 +1,28 @@
 package crawler;
 
-import crawler.util.InputHandler;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Scanner inputScanner = new Scanner(System.in);
+    static Set<String> allowedDomains = new HashSet<>();
+    public static int crawlDepth = 0;
+    public static String[] urlsToCrawl = new String[10];
 
-        String urlToCrawl = InputHandler.getInput(args, 0, inputScanner, "Enter the URL to be crawled:");
-        int crawlDepth = Integer.parseInt(InputHandler.getInput(args, 1, inputScanner, "Enter the crawl depth: "));
-        String domainsToCrawl = InputHandler.getInput(args, 2, inputScanner, "Enter the domains to be crawled (comma-separated, no spaces):");
-        String additionalLinksDepth = InputHandler.getInput(args, 3, inputScanner, "Define the depth for additional links", true);
-        String outputFilePath = InputHandler.getInput(args, 4, inputScanner, "Enter the path where the .md File should be stored. Will be stored under temp as per default", true);
+    public static void main(String[] args) {
+        InputValidator IV = new InputValidator();
 
-        inputScanner.close();
+        System.out.print("Enter the URLs to be crawled (comma separated, maximum of 10 URLs): ");
+        IV.splitURLs();
 
-        int additionalLinksCrawlDepth = additionalLinksDepth.isEmpty() ? 2 : Integer.parseInt(additionalLinksDepth);
+        System.out.print("Enter the crawling depth: ");
+        IV.inputDepth();
 
-        MarkdownGenerator markdownGenerator = new MarkdownGenerator(outputFilePath);
-        markdownGenerator.init();
+        System.out.print("Enter allowed domains (comma separated, press Enter to skip): ");
+        IV.inputDomains();
 
-        List<String> crawlDomainsList = Arrays.asList(domainsToCrawl.split(","));
-        Config crawlConfig = new Config(urlToCrawl, crawlDepth, additionalLinksCrawlDepth, crawlDomainsList);
-        PageParser pageParser = new PageParser(markdownGenerator);
-        LinkValidator linkValidator = new LinkValidator();
-        CrawlerService crawlerService = new CrawlerService(crawlConfig, linkValidator, pageParser, markdownGenerator);
+        System.out.println("\nTraversing site and writing file...\n");
+        WebCrawler.startExecutorService(urlsToCrawl, crawlDepth);
 
-        pageParser.printSummary(crawlConfig.getCrawlUrl(), crawlConfig.getCrawlDepth());
-        System.out.println("\nTraversing site...\n");
-        crawlerService.startCrawling(crawlConfig.getCrawlUrl(), crawlConfig.getCrawlDepth());
-        markdownGenerator.close();
+        FileWriterSingleton.getInstance().close();
+        System.out.println("File written successfully.\n");
     }
 }
