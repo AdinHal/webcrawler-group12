@@ -7,11 +7,12 @@ import org.jsoup.select.Elements;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
+import java.util.List;
 
 public class FileWriterSingleton {
 
     private static FileWriterSingleton instance;
-    private final BufferedWriter writer;
+    private static BufferedWriter writer;
 
     private FileWriterSingleton() {
         try {
@@ -60,6 +61,24 @@ public class FileWriterSingleton {
                             : (header.is("h3")) ? 3
                             : (header.is("h4")) ? 4 : 1;
             fileWriter.write(summaryHeaderTags.repeat(headerRouteCount) + prefix + header.text() + "\n");
+        }
+    }
+
+    public static void writeToFile(String urlToCrawl, int depth, int maxDepth, List<String> visited, boolean isInitialPage, Document document) throws IOException {
+        String depthDash = "-";
+
+        if (isInitialPage) {
+            writer.write("input: <a>" + urlToCrawl + "</a>\n" +
+                    "depth: " + maxDepth + "\n" +
+                    "summary:\n");
+            FileWriterSingleton.printHeaders(document, " ");
+            visited.add(urlToCrawl);
+        } else {
+            writer.write("<br> --> link to <a>" + urlToCrawl + "</a>\n");
+
+            FileWriterSingleton.printHeaders(document, " " + depthDash.repeat(depth) + " > ");
+            writer.write("<br>\n");
+            visited.add(urlToCrawl);
         }
     }
 }
