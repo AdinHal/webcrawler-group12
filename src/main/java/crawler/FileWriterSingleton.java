@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 
 public class FileWriterSingleton {
+
     private static FileWriterSingleton instance;
     private final BufferedWriter writer;
 
@@ -20,7 +21,7 @@ public class FileWriterSingleton {
         }
     }
 
-    public static synchronized FileWriterSingleton getInstance() {
+    public static FileWriterSingleton getInstance() {
         if (instance == null) {
             instance = new FileWriterSingleton();
         }
@@ -36,7 +37,7 @@ public class FileWriterSingleton {
         }
     }
 
-    public synchronized void close() {
+    public void close() {
         try {
             writer.close();
         } catch (IOException e) {

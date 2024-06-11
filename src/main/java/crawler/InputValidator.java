@@ -51,6 +51,7 @@ public class InputValidator {
                 scanner.next();
             }
             crawlDepth = scanner.nextInt();
+            scanner.nextLine();
         } while (crawlDepth <= 0);
     }
 

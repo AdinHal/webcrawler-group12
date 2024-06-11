@@ -19,7 +19,7 @@ public class WebCrawler implements Runnable {
     private final List<String> visited;
     private final boolean isInitialPage;
 
-    private static final int MAX_ADDITIONAL_DEPTH = 3;
+    private static final int MAX_ADDITIONAL_DEPTH = 2;
 
     public WebCrawler(String urlToCrawl, int maxDepth, List<String> visited, boolean isInitialPage) {
         this.urlToCrawl = urlToCrawl;
@@ -53,7 +53,7 @@ public class WebCrawler implements Runnable {
 
         for (String url : urls) {
             List<String> visited = new ArrayList<>();
-            WebCrawler webCrawler = new WebCrawler(url.trim(), crawlDepth, visited, true);
+            WebCrawler webCrawler = new WebCrawler(url, crawlDepth, visited, true);
             executorService.submit(webCrawler);
         }
 
