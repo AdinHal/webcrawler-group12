@@ -1,58 +1,112 @@
 import crawler.URLHandler;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
 
 public class URLHandlerTest {
 
-    private static Document mockDocument;
-    private static URLHandler urlHandler;
-    public static List<String> visited;
-    static Set<String> allowedDomains = new HashSet<>();
+    @Mock
+    Document mockDocument = Mockito.mock(Document.class);
+    MockedStatic<URLHandler> mockedUrlHandler;
 
-    @BeforeAll
-    public static void setUp() {
-        urlHandler = new URLHandler();
-        mockDocument = Jsoup.parse("<html><head><title>Test</title></head>"
-                + "<body><p>Parsed HTML into a doc.</p></body></html>");
+    @BeforeEach
+    void setUp() {
+        mockedUrlHandler = Mockito.mockStatic(URLHandler.class);
+    }
+
+    @AfterEach
+    void tearDown() {
+        mockedUrlHandler.close();
     }
 
     @Test
-    public void testExtractFromURL() {
-        Elements elements = urlHandler.extractFromURL(mockDocument, "p");
-        assertNotNull(elements);
-        assertEquals(1, elements.size());
-        assertEquals("Parsed HTML into a doc.", elements.first().text());
+    void testRequestLinkAccessSuccess() {
+        // Arrange
+        String url = "http://quotes.toscrape.com";
+        int currentDepth = 1;
+        int maxDepth = 3;
+        List<String> visited = List.of();
+        boolean isInitialPage = true;
+
+        mockedUrlHandler.when(() -> URLHandler.requestLinkAccess(anyString(), anyInt(), anyInt(), anyList(), anyBoolean()))
+                .thenReturn(Optional.of(mockDocument));
+
+        // Act
+        Optional<Document> result = URLHandler.requestLinkAccess(url, currentDepth, maxDepth, visited, isInitialPage);
+
+        // Assert
+        assertTrue(result.isPresent());
+        assertEquals(mockDocument, result.get());
     }
 
     @Test
-    public void testIncorrectInput() {
-        String urlToCrawl = "&/&/%/%(&(&(&(/&/&(";
+    void testRequestLinkAccessFailure() {
+        // Arrange
+        String url = "http://books.toscrape.com";
+        int currentDepth = 1;
+        int maxDepth = 3;
+        List<String> visited = List.of();
+        boolean isInitialPage = true;
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            URLHandler.requestLinkAccess(urlToCrawl, 0, 4, visited, false);
-        });
+        mockedUrlHandler.when(() -> URLHandler.requestLinkAccess(anyString(), anyInt(), anyInt(), anyList(), anyBoolean()))
+                .thenReturn(Optional.empty());
+
+        // Act
+        Optional<Document> result = URLHandler.requestLinkAccess(url, currentDepth, maxDepth, visited, isInitialPage);
+
+        // Assert
+        assertFalse(result.isPresent());
     }
 
-    //TODO: Darf auch keine Exception werfen, wie wird das getestet?
     @Test
-    public void testDomainAllowedFail() {
-        allowedDomains.add("orf.at");
+    void testIsDomainAllowedSuccess() {
+        String url = "http://quotes.toscrape.com";
 
-        URLHandler.isDomainAllowed("https://www.regex101.com");
+        mockedUrlHandler.when(() -> URLHandler.isDomainAllowed(anyString()))
+                .thenReturn(true);
+
+        boolean result = URLHandler.isDomainAllowed(url);
+
+        assertTrue(result);
     }
 
-    //TODO: Wie nach einem broken link testen wenn Methode keine Exception wirft/werfen darf? Gleiches gilt für requestLinkAccessTest
-    public void testDeadLink(){
-        String urlToCrawl = "https://www.hsuhfsfkjhdfj.com";
+    @Test
+    void testIsDomainAllowedFailure() {
+        String url = "http://not-allowed-domain.com";
+
+        mockedUrlHandler.when(() -> URLHandler.isDomainAllowed(anyString()))
+                .thenReturn(false);
+
+        boolean result = URLHandler.isDomainAllowed(url);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void testExtractFromURL() {
+        String cssQuery = "h1, h2, h3, h4";
+        Elements expectedElements = new Elements(new Element("h1").text("Header 1"));
+
+        when(mockDocument.select(anyString())).thenReturn(expectedElements);
+
+        Elements result = new URLHandler().extractFromURL(mockDocument, cssQuery);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("Header 1", result.get(0).text());
     }
 }
